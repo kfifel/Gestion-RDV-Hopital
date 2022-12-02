@@ -20,7 +20,7 @@ CREATE TABLE `Doctor` (
                           `id` int(10) primary key,
                           `speciality` int(10) DEFAULT NULL,
                           CONSTRAINT FK_DoctorPerson FOREIGN KEY (`id`) REFERENCES Person(`id`),
-                          CONSTRAINT FK_DoctorSpeciality FOREIGN KEY (`id`) REFERENCES Speciality(`id`)
+                          CONSTRAINT FK_DoctorSpeciality FOREIGN KEY (`speciality`) REFERENCES Speciality(`id`)
 );
 
 
@@ -48,4 +48,10 @@ CREATE TABLE `Appointment` (
                                `id_session` int(10),
                                CONSTRAINT FK_AppointmentPatient FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`id`),
                                CONSTRAINT FK_AppointmentSession FOREIGN KEY (`id_session`) REFERENCES `Session` (`id`)
+);
+
+
+create table  if not exists Admin(
+                                     id int(10) primary key,
+                                     CONSTRAINT PK_AdminPerson FOREIGN KEY (`id`) REFERENCES Person(`id`)
 );
