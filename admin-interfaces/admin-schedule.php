@@ -7,27 +7,26 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="page-content">
-        <div id="sidebar">
-            <nav class="bg-black ">
-                sidebar
-            </nav>
-        </div>
+    <div class="page-content p-5">
         <div class="admin-schedule-content">
             <!-- TOP PAGE BAR GOES HERE -->
-            <div id="top-bar">
-                <div>
-                    <button type="button"><i class="fa-solid fa-arrow-left"></i></i>Back</button>
-                    <h1>Schedule Manager</h1>
+            <div id="top-bar" class="flex justify-between">
+                <div class="flex justify-between">
+                    <div class="flex justify-center items-center bg-blue-200 text-sky-800 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
+                        <a href=""><i class="fa-solid fa-arrow-left"></i></i><span class="m-[8px]">Back</span></a>
+                    </div>
+                    <h1 class="text-2xl font-semibold ml-5">Schedule Manager</h1>
                 </div>
-                <div>
-                    <div>
-                        <span>Today's Date</span>
-                        <span>2022-11-01</span>
+                <div class="flex justify-center content-end">
+
+                    <div class="flex flex-col content-center mr-3">
+                        <span class="text-zinc-400 text-end">Today's Date</span>
+                        <span class="text-black text-2xl font-semibold">2022-11-01</span>
                     </div>
-                    <div>
-                        <i class="fa-solid fa-calendar-days"></i>
+                    <div class="flex items-center justify-center border-[1px] border-neutral-200 bg-slate-100 rounded-md w-[3rem] h-[3.5rem]">
+                        <i class="fa-solid fa-calendar-days text-2xl text-stone-700"></i>
                     </div>
+                    
                 </div>
             </div>
             <!-- ADD SESSION GOES HERE -->
@@ -44,13 +43,14 @@
                 <form action="">
                     <label for="session-date-filter">Date:</label>
                     <input type="date" name="session-date-filter">
-                    <label for="session-doctor-filter">Date:</label>
+                    <label for="session-doctor-filter">Doctor:</label>
                     <select name="session-doctor-filter">
                         <option value="0" disabled selected>Choose Doctor Name form the list</option>
                         <option value="1">Mohamed</option>
                         <option value="2">Amine</option>
                         <option value="3">Khalid</option>
                     </select>
+                    <button type="submit"><span>Filter</span><i class="fa-solid fa-filter"></i></button>
                 </form>
             </div>
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -75,8 +75,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-white border-b text-xs text-black  bg-gray-50  hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <tr class="bg-white border-b text-xs text-black  bg-gray-50  hover:bg-gray-50 ">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
                                 Apple MacBook Pro 17"
                             </th>
                             <td class="py-4 px-6">
@@ -89,8 +89,8 @@
                                 Yes
                             </td>
                             <td class="flex items-center py-4 px-6 space-x-3">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
+                                <a href=""><div class=""><i class="fa-solid fa-eye"></i><span>View</span></div></a>
+                                <a href=""><div class=""><i class="fa-solid fa-trash"></i><span>Delete</span></div></a>
                             </td>
                         </tr>
                     </tbody>
