@@ -3,12 +3,12 @@
 abstract class Person
 {
 
-    public int|null $id;
-    public string $first_name;
-    public string $last_name;
-    public string $email;
-    public string $password;
-    public string $role;
+    Protected int|null $id;
+    Protected string $first_name;
+    Protected string $last_name;
+    Protected string $email;
+    Protected string $password;
+    Protected string $role;
 
     public function __construct(int|null $id, string $first_name, string $last_name, string $email, string $password, string $role)
     {

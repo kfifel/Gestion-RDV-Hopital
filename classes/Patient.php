@@ -3,12 +3,14 @@ spl_autoload_register('autoload');
 
 class Patient extends Person
 {
-    public string $date_of_birth;
+    private string $date_of_birth;
+    private $conn;
 
-    public function __construct(int|null $id, string $first_name, string $last_name, string $email, string $password, string $date_of_birth)
+    public function __construct(int|null $id, string $first_name, string $last_name, string $email, string $password, string $role, string $date_of_birth)
     {
+        $this->conn = Database::connect();
         $this->date_of_birth = $date_of_birth;
-        parent::__construct($id, $first_name, $last_name, $email, hash("sha256", $password), "patient");
+        parent::__construct($id, $first_name, $last_name, $email, hash("sha256", $password), $role);
     }
 
     function deleteMyAccount()
@@ -23,19 +25,17 @@ class Patient extends Person
 
     public function createPatient(): array
     {
-        $conn = Database::connect();
-
         $query = "INSERT INTO Person ( `first_name`, `last_name`, `email`, `password`, `role`) VALUES (?, ?, ?, ?, ?)";
-        $sth = $conn->prepare($query);
+        $sth = $this->conn->prepare($query);
         $resp = $sth->execute(array( $this->first_name, $this->last_name, $this->email,$this->password, $this->role ));
         if($resp){
             $query1 = "SELECT `id` from `person` where `email` = '$this->email' and `password` = '$this->password'";
-            $sth1 = $conn->prepare($query1);
+            $sth1 = $this->conn->prepare($query1);
             $sth1->execute();
             $resp1 = $sth1->fetch();
             $id_Person_added = $resp1['id'];
             $query2 = "INSERT INTO Patient (id, date_of_birth) VALUES ( $id_Person_added,'$this->date_of_birth') ";
-            $sth2 = $conn->prepare($query2);
+            $sth2 = $this->conn->prepare($query2);
             $res = $sth2->execute();
             if($res)
                 return (array(true));
@@ -45,9 +45,17 @@ class Patient extends Person
         return array(false ,$sth->errorInfo());
     }
 
+    public static function getAllPatients(){
+        $conn = Database::connect();
+        
+        $query = "SELECT pr.*, pt.date_of_birth FROM patient pt inner join person pr on pt.id = pr.id";
+        $sth = $conn->query($query);
+        return ($sth->fetchAll(PDO::FETCH_ASSOC));
+    }
+
 }
 
-$conn = database::connect();
+$conn = Database::connect();
 /*$req1 = "SELECT p.*, p2.date_of_birth  from `person` p join patient p2 on p.id = p2.id
            where `email` = 'khalid@gmail.com' and `password` = 'password'";
 
@@ -62,8 +70,11 @@ echo "<pre>";
 var_dump($res1);
 echo "</pre>";*/
 
-$khalid = new Patient(null, 'khalid2', "fifel2", "p2@p.com", '123', "2000-01-09");
-print_r($khalid->createPatient());
+//$khalid = new Patient(null, 'khalid2', "fifel2", "p2@p.com", '123', "2000-01-09");
+//print_r($khalid->createPatient());
+echo "<pre>";
+var_dump(Patient::getAllPatients());
+echo "</pre>";
 
 
 function autoload($className): void
