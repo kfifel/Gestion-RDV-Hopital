@@ -39,7 +39,7 @@
                 </div>
                 <div class="mt-6 flex flex-col">
     
-                    <h4 class="font-medium text-lg ">All Sessions ( <span id="sessions-count">7</span> )</h4>
+                    <h4 class="font-medium text-lg">All Sessions ( <span id="sessions-count">7</span> )</h4>
                     <form action="" class="flex flex-row justify-end items-center p-2 text-lg border-[1px] rounded-md h-14 mt-4">
                         <div class="mr-6 ">
                             <label for="session-date-filter" class="font-medium mr-1">Date:</label>
