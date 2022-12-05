@@ -1,6 +1,6 @@
 <?php
 
-require "../includs/autoload.php";
+require "../includes/autoload.php";
 
 class Patient extends Person
 {
