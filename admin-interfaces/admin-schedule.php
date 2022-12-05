@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php 
+    $GLOBALS['page_title']="Admin Schedule";
+    include '../includes/head.php';
+?>
 <body>
 
     <div id="page-content" class="flex flex-wrap">
         <div id="sidebar" class="w-1/6">
-            sidebar
+            <?php include '../includes/admin-sidebar.php';  ?>
         </div>
     
-        <div class="p-5 w-5/6">
+        <div class="p-5 pl-[18rem] w-full">
             <div class="admin-schedule-content">
                 <!-- TOP PAGE BAR GOES HERE -->
-                <div id="top-bar" class="flex justify-between">
+                <div id="top-bar" class="flex justify-between items-center">
                     <div class="flex justify-between">
                         <a href="">
                             <div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
@@ -32,33 +30,33 @@
                             <span class="text-black text-2xl font-semibold">2022-11-01</span>
                         </div>
                         <div class="flex items-center justify-center border-[1px] border-neutral-200 bg-slate-100 rounded-md w-[3rem] h-[3.5rem]">
-                            <i class="fa-solid fa-calendar-days text-2xl text-stone-700"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.89,4,3.01,4.9,3.01,6L3,20c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20 H5V10h14V20z M19,8H5V6h14V8z M9,14H7v-2h2V14z M13,14h-2v-2h2V14z M17,14h-2v-2h2V14z M9,18H7v-2h2V18z M13,18h-2v-2h2V18z M17,18 h-2v-2h2V18z"/></g></svg>
                         </div>
                         
                     </div>
                 </div>
                 <!-- ADD SESSION GOES HERE -->
                 <div id="schedule-session" class="flex justify-start items-center mt-9">
-                    <h3 class="text-xl font-medium">Schedule a Session</h3>
+                    <h3 class="text-xl font-semibold">Schedule a Session</h3>
                     <a href="">
-                        <div type="button" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[9rem] ml-6">
-                            <div><i class="fa-regular fa-plus"></i></div>
+                        <button type="button" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                             <span>Add a Session</span>
-                        </div>
+                        </button>
                     </a>
                 </div>
     
                 <div class="mt-4 flex flex-col">
     
-                    <h4 class="font-medium text-lg ">All Sessions ( <span id="sessions-count">7</span> )</h4>
+                    <h4 class="font-semibold text-lg ">All Sessions (<span id="sessions-count">7</span>)</h4>
                     <form action="" class="flex flex-row justify-end items-center p-2 text-lg border-[1px] rounded-md h-14 mt-4">
-                        <div class="mr-6 w-3/6">
-                            <label for="session-date-filter" class="font-medium mr-1">Date:</label>
-                            <input type="date" name="session-date-filter" class="border-[1px] rounded w-2/6 h-[2.6rem]">
+                        <div class="mr-6 w-2/6" >
+                            <label for="session-date-filter" class="font-semibold mr-1w-1/6 ">Date:</label>
+                            <input type="date" name="session-date-filter" class="border-[1px] rounded  h-[2.6rem] w-5/6">
                         </div>
                         
-                        <div class="mr-6 ">
-                            <label for="session-doctor-filter" class="font-medium mr-1 w-2/6">Doctor:</label>
+                        <div class="mr-6 w-2/6">
+                            <label for="session-doctor-filter" class="font-semibold mr-1 w-2/6">Doctor:</label>
                             <select name="session-doctor-filter" class="border-[1px] rounded w-4/6 h-[2.6rem]">
                                 <option value="0" disabled selected>Choose Doctor Name form the list</option>
                                 <option value="1">Mohamed</option>
