@@ -9,7 +9,7 @@
     <div id="page-content" class="">
 
         <div id="sidebar" class="">
-            <?php include '../includes/admin-sidebar.php';  ?>
+            <?php include '../includes/doctor-sidebar.php';  ?>
         </div>
     
         <div class="p-5 pl-[18rem] w-full">
