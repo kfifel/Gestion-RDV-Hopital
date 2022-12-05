@@ -30,7 +30,7 @@ class Patient extends Person
         $sth = $this->conn->prepare($query);
         $resp = $sth->execute(array( $this->first_name, $this->last_name, $this->email,$this->password, $this->role ));
         if($resp){
-            $query1 = "SELECT `id` from `person` where `email` = '$this->email' and `password` = '$this->password'";
+            $query1 = "SELECT `id` from `Person` where `email` = '$this->email' and `password` = '$this->password'";
             $sth1 = $this->conn->prepare($query1);
             $sth1->execute();
             $resp1 = $sth1->fetch();
@@ -49,9 +49,17 @@ class Patient extends Person
     public static function getAllPatients(){
         $conn = Database::connect();
         
-        $query = "SELECT pr.*, pt.date_of_birth FROM patient pt inner join person pr on pt.id = pr.id";
+        $query = "SELECT pr.*, pt.date_of_birth FROM Patient pt inner join Person pr on pt.id = pr.id";
         $sth = $conn->query($query);
         return ($sth->fetchAll(PDO::FETCH_ASSOC));
     }
 
 }
+
+//test :
+$conn = Database::connect();
+$khalid = new Patient(null, 'khalid2', "fifel2", "pp3@p.com", '123', "patient", "2000-01-09");
+//print_r($khalid->createPatient());
+echo "<pre>";
+var_dump(Patient::getAllPatients());
+echo "</pre>";
