@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+*{
+    font-family: 'Inter',sans-serif;
+}
+
+.sidebar .active{
+    color: #1d4ed8;
+    border-right-width: 4px;
+    border-right-color: #1d4ed8;
+}
+.sidebar .active > *{
+    fill: #1d4ed8;
+}
