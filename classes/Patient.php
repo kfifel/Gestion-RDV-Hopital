@@ -7,16 +7,11 @@ class Patient extends Person
     private string $date_of_birth;
     private $conn;
 
-    public function __construct(int|null $id, string $first_name, string $last_name, string $email, string $password, string $role, string $date_of_birth)
+    public function __construct(int|null $id, string $first_name, string $last_name, string $email, string $password, string $date_of_birth, string $role='patient')
     {
         $this->conn = Database::connect();
         $this->date_of_birth = $date_of_birth;
         parent::__construct($id, $first_name, $last_name, $email, hash("sha256", $password), $role);
-    }
-
-    function deleteMyAccount()
-    {
-        // TODO implement here
     }
 
     public function takeAppointment()
@@ -54,12 +49,34 @@ class Patient extends Person
         return ($sth->fetchAll(PDO::FETCH_ASSOC));
     }
 
+    public function updatePatient(): bool
+    {
+        $query = "UPDATE Person  SET `first_name`=?, `last_name`=?, `email`=?, `password`=?, `role`=?";
+        $sth = $this->conn->prepare($query);
+        return $sth->execute(array($this->first_name, $this->last_name, $this->email, $this->password, $this->role));
+    }
+
+    public static function deletePatientById(int $id):bool{
+        $conn = Database::connect();
+        echo 'hi';
+        $query = "DELETE * FROM `Patient` WHERE `id` = $id";
+        $query1 = "DELETE * FROM `Person` WHERE `id` = $id";
+        if($conn->query($query)){
+            echo 'deleted1';
+             if($conn->query($query1)){
+                 echo 'deleted2';
+                 return true;
+             }
+        }
+        return false;
+    }
+
 }
 
 //test :
 $conn = Database::connect();
-$khalid = new Patient(null, 'khalid2', "fifel2", "pp3@p.com", '123', "patient", "2000-01-09");
+$khalid = new Patient(null, 'khalid2', "fifel2", "pp3@p.com", '123',"2000-01-09");
 //print_r($khalid->createPatient());
 echo "<pre>";
-var_dump(Patient::getAllPatients());
+var_dump(Patient::deletePatientById(9));
 echo "</pre>";
