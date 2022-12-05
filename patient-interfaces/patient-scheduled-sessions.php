@@ -18,15 +18,15 @@
             <div id="top-bar" class="flex justify-between">
                 <div class="flex justify-between items-center">
                     <a href="">
-                        <div class="flex justify-center items-center bg-blue-200 text-sky-800 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
-                            <i class="fa-solid fa-arrow-left"></i></i><span class="m-[8px]">Back</span>
+                        <div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg><span class="m-[8px]">Back</span>
                         </div>
                     </a>
                     <form action="" class="flex justify-center ml-7">
                         <input type="text" placeholder="&#xf002; Search Doctor name or Email or Date (YYY-MM-DDD)" class="border-[1px] rounded h-[2.5rem] w-[35rem] pl-3" style="font-family:arial,fontawesome;">
-                        <div class="flex justify-center items-center bg-blue-500 text-white rounded-md w-[7rem] h-[2.5rem] text-lg font-medium ml-6">
+                        <button class="flex justify-center items-center bg-blue-500 text-white rounded-md w-[7rem] h-[2.5rem] text-lg font-medium ml-6">
                             <span class="m-[8px]">Search</span>
-                        </div>
+                        </button>
                     </form>
                     
                 </div>
@@ -47,14 +47,14 @@
                 <h5 class="font-medium text-xl">All Sessions (<span>6</span>)</h5>
             </div>
 
-            <div class="border-[2px] rounded-md mt-[9rem] p-6 flex flex-col pl-[2.5rem]">
+            <div class="border-[2px] rounded-md mt-[9rem] p-6 flex flex-col pl-[2.5rem] w-5/6">
                 <h5 class="text-blue-500 text-2xl font-semibold mt-4">Test Session</h5>
                 <p class="font-extralight font-semibold mt-[2.6rem]" style="font-family: arial;">
                     <span class="font-bold">Test Doctor</span> <br>
                     2050-01-01  <br>
                     Starts: <span class="font-bold">@18:00</span> (24h)
                 </p>
-                <button class="flex justify-center items-center bg-blue-200 text-sky-800 rounded-md w-full h-[2.5rem] text-lg font-medium mt-[3rem]">
+                <button class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-full m-auto h-[2.5rem] text-lg font-medium mt-[3rem]">
                     <span class="m-[8px]">Book Now</span>
                 </button>
             </div>
