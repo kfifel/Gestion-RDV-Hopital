@@ -1,5 +1,6 @@
 <?php
-spl_autoload_register('autoload');
+
+require "../includs/autoload.php";
 
 class Patient extends Person
 {
@@ -53,31 +54,4 @@ class Patient extends Person
         return ($sth->fetchAll(PDO::FETCH_ASSOC));
     }
 
-}
-
-$conn = Database::connect();
-/*$req1 = "SELECT p.*, p2.date_of_birth  from `person` p join patient p2 on p.id = p2.id
-           where `email` = 'khalid@gmail.com' and `password` = 'password'";
-
-$query = "INSERT INTO Person ( first_name, last_name, email, password, role)
-VALUES ('khalid', 'fifel', 'khalid@gmail.com', 'password', 'admin')";
-$sth = $conn->prepare($req1);
-$sth->execute();
-//$sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Patient');
-$res1 = $sth->fetchObject();
-
-echo "<pre>";
-var_dump($res1);
-echo "</pre>";*/
-
-//$khalid = new Patient(null, 'khalid2', "fifel2", "p2@p.com", '123', "2000-01-09");
-//print_r($khalid->createPatient());
-echo "<pre>";
-var_dump(Patient::getAllPatients());
-echo "</pre>";
-
-
-function autoload($className): void
-{
-    require_once "$className.php";
 }
