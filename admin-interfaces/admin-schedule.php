@@ -2,16 +2,19 @@
 <html lang="en">
 <?php 
     $GLOBALS['page_title']="Admin Schedule";
-    include '../includes/head.php';
+    require '../includes/head.php';
+    require '../classes/Admin.php';
 ?>
-<body>
-
-    <div id="page-content" class="flex flex-wrap">
+<body> <!-- background-color:RGBA(0,0,0,0.57); -->
+    <div id="admin-schedule-content p-0" class="flex flex-wrap h-screen "> 
         <div id="sidebar" class="w-1/6">
-            <?php include '../includes/admin-sidebar.php';  ?>
+            <?php
+                $GLOBALS['current_page']="schedule";
+                 include '../includes/admin-sidebar.php';
+            ?>
         </div>
     
-        <div class="p-5 pl-[18rem] w-full">
+        <div class="p-5 pl-[18rem] w-full m-0 fixed">
             <div class="admin-schedule-content">
                 <!-- TOP PAGE BAR GOES HERE -->
                 <div id="top-bar" class="flex justify-between items-center">
@@ -38,12 +41,10 @@
                 <!-- ADD SESSION GOES HERE -->
                 <div id="schedule-session" class="flex justify-start items-center mt-9">
                     <h3 class="text-xl font-semibold">Schedule a Session</h3>
-                    <a href="">
-                        <button type="button" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                            <span>Add a Session</span>
-                        </button>
-                    </a>
+                    <button type="button" onclick="show_addSession_modal()" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        <span>Add a Session</span>
+                    </button>
                 </div>
     
                 <div class="mt-4 flex flex-col">
@@ -130,8 +131,41 @@
             </div>
         </div>
     </div>
+    <!-- ADD SESSION MODAL GOEs HERE  -->
+    <div id="add-session-modal-container" style="display:none;">
+        <div id="modal-background" class="w-screen h-screen fixed top-0 left-0"style="background-color:RGBA(0,0,0,0.57);"></div>
+        <div id="add-session-modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg" style="left:35%;">
+            <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
+                Add Session
+            </div>
+            <form action="" class="flex flex-col p-4 pb-0">
 
-    <script src="https://kit.fontawesome.com/6360d947ff.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+                <div class="flex flex-col mb-5">
+                    <label for="" class="text-sm text-slate-600 font-semibold mb-1">Title</label>
+                    <input type="text" class="bg-gray-200 rounded w-full h-[2.5rem] text-sm p-2 ">
+                </div>
+                
+                <div class="flex justify-between items-center mb-5">
+
+                    <div class="flex flex-col mb-5">
+                        <label for="" class="text-sm text-slate-600 font-semibold mb-1">Date</label>
+                        <input type="date"class="bg-gray-200 rounded w-80 h-[2.5rem] text-sm p-2">
+                    </div>
+                    
+                    <div class="flex flex-col mb-5">
+                        <label for="" class="text-sm text-slate-600 font-semibold mb-1">Max patients</label>
+                        <input type="number"class="bg-gray-200 rounded w-24 h-[2.5rem] text-sm p-2">
+                    </div>
+
+                </div>
+            </form>
+            <div id="modal-footer" class="flex justify-end bg-gray-200 border-t-2 p-2 rounded-b-lg">
+                <button type="button" onclick="hide_addSession_modal()" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
+                <button type="submit" class="bg-blue-500 rounded-md w-24 h-[2.5rem] text-white ml-4">Submit</button>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL -->
+
 </body>
 </html>
