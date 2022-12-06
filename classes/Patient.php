@@ -1,5 +1,4 @@
 <?php
-
 require "../includes/autoload.php";
 
 class Patient extends Person
@@ -80,3 +79,4 @@ $khalid = new Patient(null, 'khalid2', "fifel2", "pp3@p.com", '123',"2000-01-09"
 echo "<pre>";
 var_dump(Patient::deletePatientById(9));
 echo "</pre>";
+
