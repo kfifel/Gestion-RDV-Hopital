@@ -1,5 +1,4 @@
 <?php
-
 require "../includes/autoload.php";
 
 class Patient extends Person
@@ -76,3 +75,4 @@ $conn = Database::connect();
 echo "<pre>";
 var_dump(Patient::deletePatientById(9));
 echo "</pre>";
+
