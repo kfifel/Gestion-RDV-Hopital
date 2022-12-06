@@ -2,8 +2,8 @@
     <div class="flex items-center justify-center gap-4 py-7">
         <img src="/Gestion-RDB-Hopital/assets/img/user.png" class="w-16 h-16 rounded-full" alt="">
         <div>
-            <span class="block">Administrator</span>
-            <small>admin@youcode.ma</small>
+            <span class="block">Doctor</span>
+            <small>doctor@youcode.ma</small>
         </div>
     </div>
     <a href="">

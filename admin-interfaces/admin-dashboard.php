@@ -13,6 +13,7 @@
     ?>
     <main class="ml-64 p-6 admin-dashboard flex flex-col gap-3">
         <div class="header flex justify-between">
+            <h1 class="hidden">Admin Dashboard</h1>
             <from class="search flex gap-2 items-center w-3/4">
                 <div class="border-2 rounded flex items-center h-8 w-2/3">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#616161"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -69,7 +70,51 @@
                 </div>
             </div>
         </div>
-        <div class="upcoming-appointments">
+        <div class="flex flex-col xl:flex-row gap-4">
+            <div class="upcoming-appointments block m-0 w-full xl:w-1/2">
+                <h2 class="font-bold text-sky-700 text-2xl my-4">Upcoming Appointments until Next <span>*day*</span></h2>
+                <p class="my-4 font-medium text-slate-700 ">Here's Quick access to Upcoming Appointments until 7 days<br>more details available in @Appointment section.</p>
+                <div class="w-full h-64 border-x border-t rounded-md overflow-y-scroll mt-3">
+                    <table class="w-full relative">
+                        <tr class="sticky top-0 bg-white">
+                            <th class="border-b-4 p-2 border-sky-400">Appointment number</th>
+                            <th class="border-b-4 p-2 border-sky-400">Patient name</th>
+                            <th class="border-b-4 p-2 border-sky-400">Doctor</th>
+                            <th class="border-b-4 p-2 border-sky-400">Session</th>
+                        </tr>
+                        <tr>
+                            <td class="text-center p-2 ">4</td>
+                            <td class="text-center p-2 ">jhon doe</td>
+                            <td class="text-center p-2 ">Dr Brahim</td>
+                            <td class="text-center p-2 ">45</td>
+                        </tr>
+                    </table>
+                </div>
+                <form action="" class="mb-0">
+                    <button class="w-full p-2 bg-sky-700 text-white text-center rounded-md">Show all Appointments</button>
+                </form>
+            </div>
+            <div class="upcoming-sessions block w-full xl:w-1/2">
+                <h2 class="font-bold text-sky-700 text-2xl my-4 xl:text-right">Upcoming Sessions until Next <span>*day*</span></h2>
+                <p class="my-4 font-medium text-slate-700 xl:text-right">Here's Quick access to Upcoming Sessions taht until 7 days<br>Add,Remove and Many features available in @Schedule section.</p>
+                <div class="w-full h-64 border-x border-t rounded-md overflow-y-scroll mt-3">
+                    <table class="w-full relative">
+                        <tr class="sticky top-0 bg-white">
+                            <th class="border-b-4 p-2 border-sky-400">Session Title</th>
+                            <th class="border-b-4 p-2 border-sky-400">Doctor</th>
+                            <th class="border-b-4 p-2 border-sky-400">Schduled Date & Time</th>
+                        </tr>
+                        <tr>
+                            <td class="text-center p-2 ">Title</td>
+                            <td class="text-center p-2 ">jhon doe</td>
+                            <td class="text-center p-2 ">Dr Brahim</td>
+                        </tr>
+                    </table>
+                </div>
+                <form action="" class="mb-0">
+                    <button class="w-full p-2 bg-sky-700 text-white text-center rounded-md">Show all Sessions</button>
+                </form>
+            </div>
         </div>
     </main>
 </body>
