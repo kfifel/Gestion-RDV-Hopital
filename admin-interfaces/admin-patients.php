@@ -20,7 +20,7 @@ include('../includes/admin-sidebar.php');
         <form class="search flex gap-2 items-center w-100">
             <div class="border-2 rounded p-1 px-3 flex items-center ">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#616161"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input class="p-2 h-7 w-full focus:outline-0" type="text" name="search" placeholder="Search patient name or email">
+                <input class="p-2 h-7 border-0 rounded w-full focus:outline-0" type="text" name="search" placeholder="Search patient name or email">
             </div>
             <button class="bg-blue-600  px-4 h-8 rounded text-white" type="submit" name="search" >Search</button>
         </form>
@@ -79,14 +79,9 @@ include('../includes/admin-sidebar.php');
                                     2000-01-09
                                 </td>
                                 <td class="flex text-sm gap-4 px-5 text-gray-900 font-light px-4 py-4 whitespace-nowrap">
-                                    <button data-modal-toggle="staticModal" class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
+                                    <button onclick="show_addSession_modal()" class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg>
-                                        View
-                                    </button>
-                                    <button class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#0A76D8"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M20,4H4C2.9,4,2,4.9,2,6v3h2V6h16v3h2V6C22,4.9,21.1,4,20,4z"/><path d="M20,18H4v-3H2v3c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2v-3h-2V18z"/><path d="M14.89,7.55c-0.34-0.68-1.45-0.68-1.79,0L10,13.76l-1.11-2.21C8.72,11.21,8.38,11,8,11H2v2h5.38l1.72,3.45 C9.28,16.79,9.62,17,10,17s0.72-0.21,0.89-0.55L14,10.24l1.11,2.21C15.28,12.79,15.62,13,16,13h6v-2h-5.38L14.89,7.55z"/></g></g></svg>
-                                        Session
+                                        Overview
                                     </button>
                                 </td>
                             </tr>
@@ -104,15 +99,12 @@ include('../includes/admin-sidebar.php');
                                     2000-01-09
                                 </td>
                                 <td class="flex text-sm gap-4 px-5 text-gray-900 font-light px-4 py-4 whitespace-nowrap">
-                                    <button data-modal-toggle="staticModal" class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg>
-                                        View
-                                    </button>
-                                    <button class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#0A76D8"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M20,4H4C2.9,4,2,4.9,2,6v3h2V6h16v3h2V6C22,4.9,21.1,4,20,4z"/><path d="M20,18H4v-3H2v3c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2v-3h-2V18z"/><path d="M14.89,7.55c-0.34-0.68-1.45-0.68-1.79,0L10,13.76l-1.11-2.21C8.72,11.21,8.38,11,8,11H2v2h5.38l1.72,3.45 C9.28,16.79,9.62,17,10,17s0.72-0.21,0.89-0.55L14,10.24l1.11,2.21C15.28,12.79,15.62,13,16,13h6v-2h-5.38L14.89,7.55z"/></g></g></svg>
-                                        Session
-                                    </button>
+                                    <a href="./admin-patients.php?id=2">
+                                        <button class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg>
+                                            Overview
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>
@@ -124,46 +116,96 @@ include('../includes/admin-sidebar.php');
     </section>
 </main>
 
-
-
-<!-- Modal toggle -->
-<button class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" >
-    Toggle modal
-</button>
-
-<!-- Main modal -->
-<div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-    <div class="relative w-full h-full max-w-2xl md:h-auto">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Static modal
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="staticModal">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </button>
+<div id="modal-container" class="" style="display:none;">
+    <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
+    <div id="modal-content" class=" w-[50rem] fixed top-0  mt-[5rem] bg-white rounded-lg z-40" style="left:20%;">
+        <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
+            Overview patient
+        </div>
+        <hr>
+        <div class="overflow-y-auto  h-96">
+            <div id="modal-header"class="text-start font-semibold text-l p-2 pt-4 ">
+                Detail patient :
             </div>
-            <!-- Modal body -->
-            <div class="p-6 space-y-6">
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                </p>
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                </p>
+            <div class="flex flex-col p-5 pb-0 ml-6">
+                <div class="flex flex-row mb-5">
+                    <label class="text-sm text-slate-600 font-semibold mb-1">First Name: </label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> Khalid</label>
+                </div>
+                <div class="flex flex-row mb-5">
+                    <label class="text-sm text-slate-600 font-semibold mb-1">Last name: </label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> FIFEL</label>
+                </div>
+                <div class="flex flex-row mb-5">
+                    <label class="text-sm text-slate-600 font-semibold mb-1">Email: </label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> Khalid.fifel.official@gmail.com</label>
+                </div>
+                <div class="flex flex-row mb-5">
+                    <label class="text-sm text-slate-600 font-semibold mb-1">Date of Birth: </label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> 2022-01-09</label>
+                </div>
             </div>
-            <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-toggle="staticModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                <button data-modal-toggle="staticModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            <hr>
+            <div class="flex flex-col p-5 pb-0 ml-6">
+                <h2 class="text-start font-semibold text-l p-2 py-3">All session recorded :</h2>
+                <div class="">
+                    <table class="w-full text-left border border-slate-300 rounded-2" >
+                        <thead class="border-b-4 border-blue-500">
+                            <tr class="text-md text-black  font-medium p-3">
+                                <th scope="col" class=" p-3">
+                                    Session title
+                                </th>
+                                <th scope="col" class="p-3">
+                                    Schedule Date & Time
+                                </th>
+                                <th scope="col" class="p-3 text-center">
+                                    Max num
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                        <tr class="bg-white border-b  font-medium text-black ">
+                            <th scope="row" class="py-3 px-6 font-medium">
+                                Test Session
+                            </th>
+                            <td class="py-4 px-6">
+                                2030-01-01 18:00
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                50
+                            </td>
+                        </tr>
+                        <tr class="bg-white border-b  font-medium text-black ">
+                            <th scope="row" class="py-3 px-6 font-medium">
+                                Test Session
+                            </th>
+                            <td class="py-4 px-6">
+                                2030-01-01 18:00
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                50
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+        <div id="modal-footer" class="flex justify-end bg-gray-200 border-t-2 p-2 rounded-b-lg">
+            <button type="button" onclick="hide_addSession_modal()" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
         </div>
     </div>
 </div>
 
-
-<script src="https://cdn.tailwindcss.com"></script>
+<script>
+        function show_addSession_modal()
+        {
+            document.querySelector('#modal-container').removeAttribute("style");
+        }
+        function hide_addSession_modal()
+        {
+            document.querySelector('#modal-container').setAttribute("style","display:none;");
+        }
+</script>
 </body>
 </html>
