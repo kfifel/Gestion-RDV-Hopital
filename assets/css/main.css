@@ -11,3 +11,11 @@
 .sidebar .active > *{
     fill: #1d4ed8;
 }
+
+.doctor-dashboard .banner{
+    background-image : url('/Gestion-RDB-Hopital/assets/img/b8.jpg');
+}
+
+.patient-home .banner{
+    background-image : url('/Gestion-RDB-Hopital/assets/img/b3.jpg');
+}
