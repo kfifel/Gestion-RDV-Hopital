@@ -7,14 +7,14 @@
 ?>
 <body> <!-- background-color:RGBA(0,0,0,0.57); -->
     <div id="admin-schedule-content p-0" class="flex flex-wrap h-screen "> 
-        <div id="sidebar" class="w-1/6">
+        <div id="sidebar" class="w-1/6 z-20" >
             <?php
                 $GLOBALS['current_page']="schedule";
                  include '../includes/admin-sidebar.php';
             ?>
         </div>
     
-        <div class="p-5 pl-[18rem] w-full m-0 fixed">
+        <div class="p-5 pl-[18rem] w-full m-0 fixed z-10">
             <div class="admin-schedule-content">
                 <!-- TOP PAGE BAR GOES HERE -->
                 <div id="top-bar" class="flex justify-between items-center">
@@ -132,9 +132,9 @@
         </div>
     </div>
     <!-- ADD SESSION MODAL GOEs HERE  -->
-    <div id="add-session-modal-container" style="display:none;">
-        <div id="modal-background" class="w-screen h-screen fixed top-0 left-0"style="background-color:RGBA(0,0,0,0.57);"></div>
-        <div id="add-session-modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg" style="left:35%;">
+    <div id="add-session-modal-container" class=""style="display:none;">
+        <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
+        <div id="add-session-modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40" style="left:35%;">
             <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
                 Add Session
             </div>
@@ -166,6 +166,5 @@
         </div>
     </div>
     <!-- END MODAL -->
-
 </body>
 </html>
