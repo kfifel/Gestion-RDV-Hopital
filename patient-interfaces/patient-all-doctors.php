@@ -7,7 +7,7 @@
 <body>
     <?php
         $GLOBALS['current_page'] = 'all_doctors';
-        include('../includes/doctor-sidebar.php');
+        include('../includes/paitent-sidebar.php');
     ?>
     <main class="ml-64 p-6 admin-dashboard flex flex-col gap-3">
         <div class="header flex justify-around">
