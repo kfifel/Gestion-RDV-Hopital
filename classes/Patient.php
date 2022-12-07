@@ -1,6 +1,6 @@
 <?php
-
 require "../includes/autoload.php";
+
 class Patient extends Person
 {
     private string $date_of_birth;
@@ -15,7 +15,7 @@ class Patient extends Person
 
     public function takeAppointment()
     {
-        // TODO implement here
+
     }
 
     public function createPatient(): array
@@ -40,7 +40,8 @@ class Patient extends Person
         return array(false ,$sth->errorInfo());
     }
 
-    public static function getAllPatients(){
+    public static function getAllPatients(): bool|array
+    {
         $conn = Database::connect();
         
         $query = "SELECT pr.*, pt.date_of_birth FROM Patient pt inner join Person pr on pt.id = pr.id";
@@ -57,25 +58,21 @@ class Patient extends Person
 
     public static function deletePatientById(int $id):bool{
         $conn = Database::connect();
-        echo 'hi';
-        $query = "DELETE * FROM `Patient` WHERE `id` = $id";
-        $query1 = "DELETE * FROM `Person` WHERE `id` = $id";
+        $query = "DELETE  FROM `Patient` WHERE `id` = $id";
+        $query1 = "DELETE  FROM `Person` WHERE `id` = $id";
         if($conn->query($query)){
-            echo 'deleted1';
-             if($conn->query($query1)){
-                 echo 'deleted2';
+             if($conn->query($query1))
                  return true;
-             }
         }
         return false;
     }
-
 }
 
 //test :
 $conn = Database::connect();
-$khalid = new Patient(null, 'khalid2', "fifel2", "pp3@p.com", '123',"2000-01-09");
+//$khalid = new Patient(null, 'khalid2', "fifel2", "pp3@p.com", '123',"2000-01-09");
 //print_r($khalid->createPatient());
 echo "<pre>";
 var_dump(Patient::deletePatientById(9));
 echo "</pre>";
+

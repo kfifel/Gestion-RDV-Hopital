@@ -19,5 +19,4 @@ abstract class Person
         $this->password = $password;
         $this->role = $role;
     }
-
 }
