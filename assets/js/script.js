@@ -1,8 +1,8 @@
-function show_addSession_modal()
+function show_modal()
 {
-    document.querySelector('#add-session-modal-container').removeAttribute("style");
+    document.querySelector('#modal-container').removeAttribute("style");
 }
-function hide_addSession_modal()
+function hide_modal()
 {
-    document.querySelector('#add-session-modal-container').setAttribute("style","display:none;");
+    document.querySelector('#modal-container').setAttribute("style","display:none;");
 }
