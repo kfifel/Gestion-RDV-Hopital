@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <head>
+ <?php
+        $GLOBALS['page_title'] = 'Appointment Dashboard';
+        include('../includes/head.php');
+    ?>
+</head> 
 
-    <link rel="stylesheet" href="/Gestion-RDB-Hopital/assets/css/main.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Appointment</title>
-</head>
 <body>    
 <?php 
     $GLOBALS['current_page'] = 'appointment';
@@ -26,7 +24,7 @@
         <div class= "ml-auto flex items-center gap-4">  
                     <div class="block ">       
                     <p>Today's Date <br></p>
-                    <p class="font-bold">2022-12-01</p>
+                    <p class="font-bold"><?= $today = date("Y-m-d");?></p>
                   </div> 
                   <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.89,4,3.01,4.9,3.01,6L3,20c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20 H5V10h14V20z M19,8H5V6h14V8z M9,14H7v-2h2V14z M13,14h-2v-2h2V14z M17,14h-2v-2h2V14z M9,18H7v-2h2V18z M13,18h-2v-2h2V18z M17,18 h-2v-2h2V18z"/></g></svg>
 
@@ -37,17 +35,17 @@
             <h6 class ="font-bold m-4 p-2">All Appointments <span>(2)</span></h6>
             <div class="flex items-center ml-2 border">
                 
-                  <div class ="items-center m-2 ml-20 p-2">
-                    <label for="" class="ml-16"> Date:</label>
+                  <div class ="items-center m-2 ml-8 p-2">
+                    <label for="" class="ml-8"> Date:</label>
                     <input class="py-1 px-10 border" type="date">
                   </div>
                   <div class="items-center border ml-16 p-2 m-2">
                     <label for=""class="ml-20">Doctor: </label>
                     <select class=" py-1 px-4"name="" id="">
                       <option class="text-gray-50" value="">Choose Doctor Name</option>
-                      <option value="1">Psychiatrie</option>
-                      <option value="2">Pediatrie</option>
-                      <option value="3">Cardioogie</option>
+                      <option value="1">Dr. Robert</option>
+                      <option value="2">Dr. Kathryn</option>
+                      <option value="3">Dr. Julie</option>
                     </select>
               
             </div>
