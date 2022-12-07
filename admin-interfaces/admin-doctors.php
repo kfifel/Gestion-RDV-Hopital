@@ -10,7 +10,11 @@
     <div id="page-content" class="">
 
         <div id="sidebar" class="">
-            <?php include '../includes/admin-sidebar.php';  ?>
+            
+            <?php 
+            $GLOBALS['current_page']="doctors";
+            include '../includes/admin-sidebar.php'; 
+             ?>
         </div>
 
         <div class="p-5 pl-[18rem] w-full admin-schedule-content">
