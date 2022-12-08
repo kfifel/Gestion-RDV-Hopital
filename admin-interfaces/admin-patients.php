@@ -1,3 +1,7 @@
+<?php
+include '../classes/Patient.php';
+include '../classes/Session.php';
+?>
 <!doctype html>
 <html lang="en">
 <?php
@@ -116,6 +120,22 @@ include('../includes/admin-sidebar.php');
     </section>
 </main>
 
+<script>
+    function show_addSession_modal()
+    {
+        document.querySelector('#modal-container').removeAttribute("style");
+    }
+    function hide_addSession_modal()
+    {
+        document.querySelector('#modal-container').setAttribute("style","display:none;");
+    }
+</script>
+<?php
+        if( isset($_GET['id'])):
+            $patient = Patient::getPatientById($_GET['id']);
+            $AllSessionRecorded = Session::getAllSessionRecorded($_GET['id']);
+    ?>
+
 <div id="modal-container" class="" style="display:none;">
     <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
     <div id="modal-content" class=" w-[50rem] fixed top-0  mt-[5rem] bg-white rounded-lg z-40" style="left:20%;">
@@ -130,19 +150,19 @@ include('../includes/admin-sidebar.php');
             <div class="flex flex-col p-5 pb-0 ml-6">
                 <div class="flex flex-row mb-5">
                     <label class="text-sm text-slate-600 font-semibold mb-1">First Name: </label>
-                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> Khalid</label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4" > <?=$patient['first_name']?></label>
                 </div>
                 <div class="flex flex-row mb-5">
                     <label class="text-sm text-slate-600 font-semibold mb-1">Last name: </label>
-                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> FIFEL</label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4" > <?=$patient['last_name']?></label>
                 </div>
                 <div class="flex flex-row mb-5">
                     <label class="text-sm text-slate-600 font-semibold mb-1">Email: </label>
-                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> Khalid.fifel.official@gmail.com</label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4" id="email"> <?=$patient['email']?></label>
                 </div>
                 <div class="flex flex-row mb-5">
                     <label class="text-sm text-slate-600 font-semibold mb-1">Date of Birth: </label>
-                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4"> 2022-01-09</label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4" id="date_of_birth"><?=$patient['first_name']?></label>
                 </div>
             </div>
             <hr>
@@ -197,15 +217,11 @@ include('../includes/admin-sidebar.php');
     </div>
 </div>
 
-<script>
-        function show_addSession_modal()
-        {
-            document.querySelector('#modal-container').removeAttribute("style");
-        }
-        function hide_addSession_modal()
-        {
-            document.querySelector('#modal-container').setAttribute("style","display:none;");
-        }
-</script>
+            <script>
+                show_addSession_modal();
+            </script>
+<?php endif; ?>
+
+<?php require "../includes/footer.php"; ?>
 </body>
 </html>
