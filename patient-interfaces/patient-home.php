@@ -32,7 +32,7 @@
                 <from class="search flex gap-2 items-center w-full lg:w-3/4">
                     <div class="border-2 rounded flex items-center bg-white h-8 w-full lg:w-2/3">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#616161"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                        <input class="p-2 h-7 w-full focus:outline-0" type="text" placeholder="Search doctor name or email">
+                        <input class="p-2 border-0 h-7 w-full focus:outline-0" type="text" placeholder="Search doctor name or email">
                     </div>
                     <button class="bg-sky-600 px-4 h-8 rounded text-white" >Search</button>
                 </from>
@@ -96,9 +96,9 @@
                         </tr>
                     </table>
                 </div>
-                <form action="" class="mb-0">
-                    <button class="w-full p-2 bg-sky-700 text-white text-center rounded-md">Show all Sessions</button>
-                </form>
+                <a href="patient-scheduled-sessions.php">
+                    <div class="w-full p-2 bg-sky-700 text-white text-center rounded-md" >Show all Sessions</div>
+                </a>
             </div>
         </div>
     </main>
