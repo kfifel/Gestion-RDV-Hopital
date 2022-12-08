@@ -4,6 +4,9 @@
 <?php 
     $GLOBALS['page_title']="Admin Doctors";
     include '../includes/head.php';
+    include '../classes/Database.php';
+    $conn = Database::connect();
+        var_dump($conn);
 ?>
 <body>
 
@@ -49,12 +52,12 @@
             <!-- ADD SESSION GOES HERE -->
             <div id="schedule-session" class="flex justify-between items-center mt-9">
                 <h3 class="text-xl font-semibold">Add New Doctor</h3>
-                <a href="">
+               
                     <div type="button" class="flex justify-around bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[8rem] mr-7">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                         <span>Add New</span>
                     </div>
-                </a>
+              
             </div>
 
             <div class="overflow-x-auto relative shadow-md mt-6 rounded max-h-[35rem] min-h-[20rem] overflow-y-auto w-full m-auto">
