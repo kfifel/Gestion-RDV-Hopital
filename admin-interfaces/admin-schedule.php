@@ -2,16 +2,19 @@
 <html lang="en">
 <?php 
     $GLOBALS['page_title']="Admin Schedule";
-    include '../includes/head.php';
+    require '../includes/head.php';
+    require '../classes/Admin.php';
 ?>
-<body>
-
-    <div id="page-content" class="flex flex-wrap">
-        <div id="sidebar" class="w-1/6">
-            <?php include '../includes/admin-sidebar.php';  ?>
+<body> <!-- background-color:RGBA(0,0,0,0.57); -->
+    <div id="admin-schedule-content p-0" class="flex flex-wrap h-screen "> 
+        <div id="sidebar" class="w-1/6 z-20" >
+            <?php
+                $GLOBALS['current_page']="schedule";
+                 include '../includes/admin-sidebar.php';
+            ?>
         </div>
     
-        <div class="p-5 pl-[18rem] w-full">
+        <div class="p-5 pl-[18rem] w-full m-0 fixed z-10">
             <div class="admin-schedule-content">
                 <!-- TOP PAGE BAR GOES HERE -->
                 <div id="top-bar" class="flex justify-between items-center">
@@ -38,12 +41,10 @@
                 <!-- ADD SESSION GOES HERE -->
                 <div id="schedule-session" class="flex justify-start items-center mt-9">
                     <h3 class="text-xl font-semibold">Schedule a Session</h3>
-                    <a href="">
-                        <button type="button" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                            <span>Add a Session</span>
-                        </button>
-                    </a>
+                    <button type="button" onclick="show_modal()" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        <span>Add a Session</span>
+                    </button>
                 </div>
     
                 <div class="mt-4 flex flex-col">
@@ -94,34 +95,42 @@
                             </tr>
                         </thead>
                         <tbody class="">
-                            <tr class="bg-white border-b  font-medium text-black ">
-                                <th scope="row" class="py-3 px-6 font-medium">
-                                    Test Session
-                                </th>
-                                <td class="py-4 px-6">
-                                    Test Doctor
-                                </td>
-                                <td class="py-4 px-6">
-                                    2030-01-01 18:00
-                                </td>
-                                <td class="py-4 px-6">
-                                    50
-                                </td>
-                                <td class="flex items-center py-4 px-6 space-x-3">
-                                    <a href="">
-                                        <div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg><span>View</span>
-                                        </div>
-                                    </a>
+                        <?php 
 
-                                    <a href="">
-                                        <div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/></svg><span>Remove</span>
-                                        </div>
-                                    </a>
-                                </td>
-                            </tr>
-                            
+                            $admin= new Admin;
+                            $myData=$admin->showSessions();
+                            foreach ($myData as $row)
+                            {
+                                echo '<tr class="bg-white border-b  font-medium text-black ">
+                                        <th scope="row" class="py-3 px-6 font-medium">
+                                            '.$row['title'].'
+                                        </th>
+                                        <td class="py-4 px-6">
+                                            '.$row['last_name_doctor']." ".$row['first_name_doctor'].'
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            '.$row['date_start'].'
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            '.$row['max_patient'].'
+                                        </td>
+                                        <td class="flex items-center py-4 px-6 space-x-3">
+                                            <a href="">
+                                                <div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg><span>View</span>
+                                                </div>
+                                            </a>
+                        
+                                            <a href="">
+                                                <div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/></svg><span>Remove</span>
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>';
+                            }
+
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -130,8 +139,40 @@
             </div>
         </div>
     </div>
+    <!-- ADD SESSION MODAL GOEs HERE  -->
+    <div id="modal-container" class=""style="display:none;">
+        <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
+        <div id="modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40" style="left:35%;">
+            <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
+                Add Session
+            </div>
+            <form action="" class="flex flex-col p-4 pb-0">
 
-    <script src="https://kit.fontawesome.com/6360d947ff.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+                <div class="flex flex-col mb-5">
+                    <label for="" class="text-sm text-slate-600 font-semibold mb-1">Title</label>
+                    <input type="text" class="bg-gray-200 rounded w-full h-[2.5rem] text-sm p-2 ">
+                </div>
+                
+                <div class="flex justify-between items-center mb-5">
+
+                    <div class="flex flex-col mb-5">
+                        <label for="" class="text-sm text-slate-600 font-semibold mb-1">Date</label>
+                        <input type="date"class="bg-gray-200 rounded w-80 h-[2.5rem] text-sm p-2">
+                    </div>
+                    
+                    <div class="flex flex-col mb-5">
+                        <label for="" class="text-sm text-slate-600 font-semibold mb-1">Max patients</label>
+                        <input type="number"class="bg-gray-200 rounded w-24 h-[2.5rem] text-sm p-2">
+                    </div>
+
+                </div>
+            </form>
+            <div id="modal-footer" class="flex justify-end bg-gray-200 border-t-2 p-2 rounded-b-lg">
+                <button type="button" onclick="hide_modal()" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
+                <button type="submit" class="bg-blue-500 rounded-md w-24 h-[2.5rem] text-white ml-4">Submit</button>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL -->
 </body>
 </html>

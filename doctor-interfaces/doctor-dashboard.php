@@ -92,11 +92,13 @@
                         </tr>
                     </table>
                 </div>
-                <form action="" class="mb-0">
-                    <button class="w-full p-2 bg-sky-700 text-white text-center rounded-md">Show all Sessions</button>
-                </form>
+                <a href="doctor-my-sessions.php">
+                    <div class="w-full p-2 bg-sky-700 text-white text-center rounded-md" >Show all Sessions</div>
+                </a>
             </div>
         </div>
     </main>
+
+
 </body>
 </html>

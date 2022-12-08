@@ -43,6 +43,7 @@ CREATE TABLE if not exists  `Appointment` (
                                               `id` int (10) primary key auto_increment,
                                               `order` int(20),
                                               `date` date,
+                                              `booking_date` date,
                                               `id_patient` int(10),
                                               `id_session` int(10),
                                               CONSTRAINT FK_AppointmentPatient FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`id`),
