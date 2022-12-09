@@ -4,7 +4,7 @@
     $GLOBALS['page_title']="Admin Schedule";
     require '../includes/head.php';
     require '../controller/Admin.controller.php';
-    
+    setDoctorAsOptions();
 ?>
 <body> <!-- background-color:RGBA(0,0,0,0.57); -->
     <div id="admin-schedule-content p-0" class="flex flex-wrap h-screen "> 
@@ -50,7 +50,7 @@
     
                 <div class="mt-4 flex flex-col">
     
-                    <h4 class="font-semibold text-lg ">All Sessions (<span id="sessions-count"><?= COUNT(Session::readSession())?></span>)</h4>
+                    <h4 class="font-semibold text-lg ">All Sessions (<span id="sessions-count"><?= COUNT(Admin::readSession())?></span>)</h4>
                     <form action="admin-schedule.php" class="flex flex-row justify-end items-center p-2 text-lg border-[1px] rounded-md h-14 mt-4" method="POST">
                         <div class="mr-6 w-2/6" >
                             <label for="session-date-filter" class="font-semibold mr-1w-1/6 ">Date:</label>
@@ -60,10 +60,7 @@
                         <div class="mr-6 w-2/6">
                             <label for="session-doctor-filter" class="font-semibold mr-1 w-2/6">Doctor:</label>
                             <select name="session-doctor-filter" class="border-[1px] rounded w-5/6 h-[2.6rem]">
-                                <option value="0" disabled selected>Choose Doctor Name form the list</option>
-                                <option value="1">Mohamed</option>
-                                <option value="aabdi">Amine</option>
-                                <option value="3">Khalid</option>
+                                <?php setDoctorAsOptions();?>
                             </select>
                         </div>
                         

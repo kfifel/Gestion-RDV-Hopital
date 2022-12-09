@@ -11,18 +11,19 @@ function createSession(){
     $date=$_POST['session-date'];
     $max_patients=$_POST['session-patients'];
     $MySession= new Session($title,$doctor,$date,$max_patients);
-    $MySession->createSession();
+    $admin= new Admin();
+    $admin->createSession($MySession);
 }
 
 function deteSession(){
-    $MySession=new Session();
+    $MySession=new Admin();
     $MySession->deleteSession($_GET['delete-session']);
 }
 
 function readSession(){
     $date = isset($_POST['session-date-filter']) ? $_POST['session-date-filter'] : null;
     $doctor = isset($_POST['session-doctor-filter']) ? $_POST['session-doctor-filter'] : null;
-    $MyData=Session::readSession($date,$doctor);
+    $MyData=Admin::readSession($date,$doctor);
     foreach ($MyData as $row)
     {
         echo '<tr class="bg-white border-b  font-medium text-black ">
@@ -55,6 +56,15 @@ function readSession(){
     }
 }
 
+function setDoctorAsOptions(){
+    $admin=new Admin();
+    $MyDoctors=$admin->getAllDoctors();
+    var_dump($MyDoctors);die;
+    foreach($MyDoctors as $doctor)
+    {
+        echo "<option value=".$doctor['id'].">".$doctor['first_name']." dddzdzdzdzd".$doctor['last_name']."</option>";
+    }
+}
 //AND first_name LIKE $doctor OR last_name LIKE $doctor
 
 
