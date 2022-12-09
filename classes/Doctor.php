@@ -1,5 +1,5 @@
 <?php
-require "../includes/autoload.php";
+require_once "../includes/autoload.php";
 class Doctor extends Person
 {
     protected int $speciality;
