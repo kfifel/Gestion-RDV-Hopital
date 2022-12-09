@@ -10,7 +10,7 @@
         include('../includes/paitent-sidebar.php');
     ?>
     <main class="ml-64 p-6 admin-dashboard flex flex-col gap-3">
-        <div class="header flex justify-around">
+        <div class="header flex justify-between">
             <div class="flex gap-2 items-center">
                 <button class=" flex gap-2 px-4 py-1 text-blue-600 rounded-md font-bold bg-blue-100">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
