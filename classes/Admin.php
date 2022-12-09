@@ -1,28 +1,12 @@
-
 <?php
-    require "../includes/autoload.php";
-    require 'Database.php';
+require_once '../includes/autoload.php';
 
-class Admin 
-{   
-    private $first_name;
-    private $last_name;
-    private $email;
-    private $password;
 
-    private function createSession (){
+class Admin extends Person
+{
+    
+    
+}
 
-    }
-
-    private function createDoctor (){
-        
-    }
-
-    public function showSessions()
-    {   
-       
-    }
-   
-    }
 
 
