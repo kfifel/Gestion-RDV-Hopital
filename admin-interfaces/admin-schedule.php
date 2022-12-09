@@ -51,7 +51,7 @@
                 <div class="mt-4 flex flex-col">
     
                     <h4 class="font-semibold text-lg ">All Sessions (<span id="sessions-count"><?= COUNT(Session::readSession())?></span>)</h4>
-                    <form action="../controller/Admin.controller.php" class="flex flex-row justify-end items-center p-2 text-lg border-[1px] rounded-md h-14 mt-4" method="POST">
+                    <form action="admin-schedule.php" class="flex flex-row justify-end items-center p-2 text-lg border-[1px] rounded-md h-14 mt-4" method="POST">
                         <div class="mr-6 w-2/6" >
                             <label for="session-date-filter" class="font-semibold mr-1w-1/6 ">Date:</label>
                             <input type="date" name="session-date-filter" class="border-[1px] rounded  h-[2.6rem] w-5/6">
@@ -59,7 +59,7 @@
                         
                         <div class="mr-6 w-2/6">
                             <label for="session-doctor-filter" class="font-semibold mr-1 w-2/6">Doctor:</label>
-                            <select name="session-doctor-filter" class="border-[1px] rounded w-4/6 h-[2.6rem]">
+                            <select name="session-doctor-filter" class="border-[1px] rounded w-5/6 h-[2.6rem]">
                                 <option value="0" disabled selected>Choose Doctor Name form the list</option>
                                 <option value="1">Mohamed</option>
                                 <option value="aabdi">Amine</option>
@@ -96,7 +96,7 @@
                             </tr>
                         </thead>
                         <tbody class="">
-                        <?php readSessions();
+                        <?php readSession();
                         ?>
                         </tbody>
                     </table>
@@ -117,23 +117,23 @@
 
                 <div class="flex flex-col mb-5 px-4">
                     <label for="session-title" class="text-sm text-slate-600 font-semibold mb-1">Title</label>
-                    <input type="text" class="bg-gray-200 rounded w-full h-[2.5rem] text-sm p-2" name="session-title">
+                    <input type="text" class="bg-gray-200 border-0 rounded w-full h-[2.5rem] text-sm p-2" name="session-title">
                 </div>
                 <div class="flex flex-col mb-5 px-4">
                     <label for="session-doctor" class="text-sm text-slate-600 font-semibold mb-1">Doctor's Name</label>
-                    <input type="text" class="bg-gray-200 rounded w-full h-[2.5rem] text-sm p-2" name="session-doctor">
+                    <input type="text" class="bg-gray-200 border-0 rounded w-full h-[2.5rem] text-sm p-2" name="session-doctor">
                 </div>
                 
                 <div class="flex justify-between items-center mb-5 px-4">
 
                     <div class="flex flex-col mb-5">
                         <label for="session-date" class="text-sm text-slate-600 font-semibold mb-1">Date</label>
-                        <input type="date"  class="bg-gray-200 rounded w-80 h-[2.5rem] text-sm p-2" name="session-date">
+                        <input type="date"  class="bg-gray-200 border-0 rounded w-80 h-[2.5rem] text-sm p-2" name="session-date">
                     </div>
                     
                     <div class="flex flex-col mb-5">
                         <label for="session-patients" class="text-sm text-slate-600 font-semibold mb-1">Max patients</label>
-                        <input type="number"class="bg-gray-200 rounded w-24 h-[2.5rem] text-sm p-2" name="session-patients">
+                        <input type="number"class="bg-gray-200 border-0 rounded w-24 h-[2.5rem] text-sm p-2" name="session-patients">
                     </div>
 
                 </div>
@@ -145,5 +145,6 @@
         </div>
     </div>
     <!-- END MODAL -->
+<?php require_once'../includes/footer.php';?>
 </body>
 </html>

@@ -3,7 +3,6 @@ require('../includes/autoload.php');
 // ROUTING
 if( isset($_POST['create-session']) )  createSession();
 if( isset($_GET['delete-session']) )  deteSession();
-if( isset($_POST['filter-session']) )  filterSession();
 
 
 function createSession(){
@@ -20,20 +19,11 @@ function deteSession(){
     $MySession->deleteSession($_GET['delete-session']);
 }
 
-function filterSession(){
-    $date=$_POST['session-date-filter'];
-    $doctor=$_POST['session-doctor-filter'];
-    $MySession=Session::readSession($date,$doctor);
-    echo "<pre>";
-    var_dump($MySession);
-    echo "</pre>";
-    die;
-}
-
-
-function readSessions(){
-    $myData=Session::readSession();
-    foreach ($myData as $row)
+function readSession(){
+    $date = isset($_POST['session-date-filter']) ? $_POST['session-date-filter'] : null;
+    $doctor = isset($_POST['session-doctor-filter']) ? $_POST['session-doctor-filter'] : null;
+    $MyData=Session::readSession($date,$doctor);
+    foreach ($MyData as $row)
     {
         echo '<tr class="bg-white border-b  font-medium text-black ">
                 <th scope="row" class="py-3 px-6 font-medium">
@@ -64,9 +54,10 @@ function readSessions(){
             </tr>';
     }
 }
+
 //AND first_name LIKE $doctor OR last_name LIKE $doctor
 
 
-echo "<pre>";
+// echo "<pre>";
 
-echo "</pre>";
+// echo "</pre>";

@@ -44,7 +44,7 @@ class Session
             Database::disconnect();
             header('Location: ../admin-interfaces/admin-schedule.php');
         } catch (Exception $e) {
-            echo 'Message: ' .$e->getMessage();
+            die( 'Message: ' .$e->getMessage());
         }
     }
 
