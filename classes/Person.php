@@ -1,5 +1,5 @@
 <?php
-require '../includes/autoload.php';
+require_once '../includes/autoload.php';
 
 abstract class Person
 {
@@ -40,11 +40,14 @@ abstract class Person
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         $stats['NewBooking'] = $result[0]['count(id)'];
 
-
         $req = Database::connect()->prepare('Select count(id) from session where date_start like CURRENT_DATE()');
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         $stats['todaySession'] = $result[0]['count(id)'];
+
+        Database::disconnect();
+
+
 
         return $stats;
     }
