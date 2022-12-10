@@ -7,10 +7,10 @@ if( isset($_GET['delete-session']) )  deteSession();
 
 function createSession(){
     $title=$_POST['session-title'];
-    $doctor=$_POST['session-doctor'];
+    $doctor_id=$_POST['session-doctor'];
     $date=$_POST['session-date'];
     $max_patients=$_POST['session-patients'];
-    $MySession= new Session($title,$doctor,$date,$max_patients);
+    $MySession= new Session($title,$doctor_id,$date,$max_patients);
     $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $admin->createSession($MySession);
 }
@@ -24,6 +24,8 @@ function readSession(){
     $date = isset($_POST['session-date-filter']) ? $_POST['session-date-filter'] : null;
     $doctor = isset($_POST['session-doctor-filter']) ? $_POST['session-doctor-filter'] : null;
     $MyData=Admin::readSession($date,$doctor);
+    // var_dump($MyData);
+    // die;
     foreach ($MyData as $row)
     {
         echo '<tr class="bg-white border-b  font-medium text-black ">
@@ -66,9 +68,7 @@ function setDoctorAsOptions(){
         echo '<option value="'.$doctor['id'].'">'.$doctorFullName.'</option>';
     }
 }
-//AND first_name LIKE $doctor OR last_name LIKE $doctor
-
-
-// echo "<pre>";
-
-// echo "</pre>";
+function deleteDoctor(){
+    $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
+    $admin->deleteDoctor(2);
+}

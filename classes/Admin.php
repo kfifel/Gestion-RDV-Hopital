@@ -40,7 +40,7 @@ class Admin extends Person
             $conn=Database::connect();
             $sql="INSERT INTO `session`( `title`, `date_start`, `max_patient`, `id_doctor`) VALUES (?,?,?,?)";
             $stmt=$conn->prepare($sql);
-            $stmt->execute([$MySession->title,$MySession->date_start,$MySession->max_patients,'2']);
+            $stmt->execute([$MySession->title,$MySession->date_start,$MySession->max_patients,$MySession->doctor_id]);
             Database::disconnect();
             header('Location: ../admin-interfaces/admin-schedule.php');
         } catch (Exception $e) {
@@ -51,9 +51,9 @@ class Admin extends Person
     public function  deleteSession($id){
         try {
         $conn=Database::connect();
-        $sql="DELETE FROM `session` WHERE id=$id";
+        $sql="DELETE FROM `session` WHERE id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([$id]);
         Database::disconnect();
         header('Location: ../admin-interfaces/admin-schedule.php');
         } 
@@ -67,7 +67,20 @@ class Admin extends Person
         $res = $conn->query($requete);
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+    public function deleteDoctor($id){
+        try {
+            $conn=Database::connect();
+            $sql="DELETE FROM `doctor` WHERE id=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$id,$id]);
+            Database::disconnect();
+            header('Location: ../admin-interfaces/admin-schedule.php');
+            } 
+            catch (Exception $e) {
+                echo 'Message: ' .$e->getMessage();
+            }
+    }
+
 }
 
 
