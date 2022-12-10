@@ -1,11 +1,11 @@
 <?php
 class Session
 {   
-    private $id;
-    private $title;
-    private $doctor_name;
-    private $date_start;
-    private $max_patients;
+    public $id;
+    public $title;
+    public $doctor_name;
+    public $date_start;
+    public $max_patients;
 
     function __construct($title=null,$doctor_name=null,$date_start=null,$max_patients=null){
 

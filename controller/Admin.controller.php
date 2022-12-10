@@ -11,13 +11,13 @@ function createSession(){
     $date=$_POST['session-date'];
     $max_patients=$_POST['session-patients'];
     $MySession= new Session($title,$doctor,$date,$max_patients);
-    $admin= new Admin();
+    $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $admin->createSession($MySession);
 }
 
 function deteSession(){
-    $MySession=new Admin();
-    $MySession->deleteSession($_GET['delete-session']);
+    $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
+    $admin->deleteSession($_GET['delete-session']);
 }
 
 function readSession(){
@@ -54,15 +54,16 @@ function readSession(){
                 </td>
             </tr>';
     }
+    unset($_POST['session-date-filter']);
+    unset($_POST['session-doctor-filter']);
 }
-
 function setDoctorAsOptions(){
-    $admin=new Admin();
+    $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $MyDoctors=$admin->getAllDoctors();
-    var_dump($MyDoctors);die;
     foreach($MyDoctors as $doctor)
-    {
-        echo "<option value=".$doctor['id'].">".$doctor['first_name']." dddzdzdzdzd".$doctor['last_name']."</option>";
+    {   
+        $doctorFullName=$doctor['first_name']." ".$doctor['last_name'];
+        echo '<option value="'.$doctor['id'].'">'.$doctorFullName.'</option>';
     }
 }
 //AND first_name LIKE $doctor OR last_name LIKE $doctor

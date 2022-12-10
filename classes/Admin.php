@@ -13,10 +13,20 @@ class Admin extends Person
               INNER JOIN doctor on id_doctor=doctor.id";
     }
     else {
-        $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
+        if($date==null) 
+        {
+            $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
               FROM `session` 
               INNER JOIN doctor on session.id_doctor=doctor.id
-              WHERE date_start='$date' AND (first_name LIKE '%$doctor%' OR last_name LIKE '%$doctor%')";
+              WHERE session.id_doctor=$doctor";
+        }
+        else{
+            $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
+              FROM `session` 
+              INNER JOIN doctor on session.id_doctor=doctor.id
+              WHERE date_start='$date' ";
+        }
+        
     }
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -25,7 +35,7 @@ class Admin extends Person
     return $result;
     }
 
-    private function  createSession($MySession){
+    public function  createSession($MySession){
         try {
             $conn=Database::connect();
             $sql="INSERT INTO `session`( `title`, `date_start`, `max_patient`, `id_doctor`) VALUES (?,?,?,?)";
@@ -38,7 +48,7 @@ class Admin extends Person
         }
     }
 
-    private function  deleteSession($id){
+    public function  deleteSession($id){
         try {
         $conn=Database::connect();
         $sql="DELETE FROM `session` WHERE id=$id";
