@@ -1,18 +1,17 @@
-<?php
-include '../classes/Patient.php';
-include '../classes/Session.php';
-?>
+    <?php
+    require_once "../includes/autoload.php";
+    ?>
 <!doctype html>
 <html lang="en">
-<?php
-$GLOBALS['page_title']="All patient";
-require "../includes/head.php";
-?>
+    <?php
+        $GLOBALS['page_title']="All patient";
+        require "../includes/head.php";
+    ?>
 <body>
-<?php
-$GLOBALS['current_page'] = 'patients';
-include('../includes/admin-sidebar.php');
-?>
+    <?php
+        $GLOBALS['current_page'] = 'patients';
+        include('../includes/admin-sidebar.php');
+    ?>
 <main class="ml-64 p-6 admin-dashboard flex flex-col gap-3">
     <div class="header flex justify-between">
         <div class="flex gap-2 items-center">
@@ -21,17 +20,17 @@ include('../includes/admin-sidebar.php');
                 Back
             </button>
         </div>
-        <form class="search flex gap-2 items-center w-100">
+        <form class="search flex gap-2 items-center w-100" action="../controller/Admin.controller.php" method="post">
             <div class="border-2 rounded p-1 px-3 flex items-center ">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#616161"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                 <input class="p-2 h-7 border-0 rounded w-full focus:outline-0" type="text" name="search" placeholder="Search patient name or email">
             </div>
-            <button class="bg-blue-600  px-4 h-8 rounded text-white" type="submit" name="search" >Search</button>
+            <button class="bg-blue-600  px-4 h-8 rounded text-white" type="submit" name="search_patient" >Search</button>
         </form>
         <div class="date flex gap-2">
             <div class="font-bold">
                 <small class="block text-slate-500 text-right">Today's Date</small>
-                <span class="">2022-20-11</span>
+                <span class=""><?=date('Y-m-d')?></span>
             </div>
             <div class="h-11 w-11 flex justify-center items-center border-2 rounded bg-slate-100">
                 <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.89,4,3.01,4.9,3.01,6L3,20c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20 H5V10h14V20z M19,8H5V6h14V8z M9,14H7v-2h2V14z M13,14h-2v-2h2V14z M17,14h-2v-2h2V14z M9,18H7v-2h2V18z M13,18h-2v-2h2V18z M17,18 h-2v-2h2V18z"/></g></svg>
@@ -130,24 +129,24 @@ include('../includes/admin-sidebar.php');
         document.querySelector('#modal-container').setAttribute("style","display:none;");
     }
 </script>
-<?php
+    <?php
         if( isset($_GET['id'])):
             $patient = Patient::getPatientById($_GET['id']);
             $AllSessionRecorded = Session::getAllSessionRecorded($_GET['id']);
     ?>
 
 <div id="modal-container" class="" style="display:none;">
-    <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
+    <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30" style="background-color:RGBA(0,0,0,0.57);"></div>
     <div id="modal-content" class=" w-[50rem] fixed top-0  mt-[5rem] bg-white rounded-lg z-40" style="left:20%;">
-        <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
+        <div id="modal-header" class="text-center font-semibold text-xl p-2 pt-4 ">
             Overview patient
         </div>
         <hr>
-        <div class="overflow-y-auto  h-96">
-            <div id="modal-header"class="text-start font-semibold text-l p-2 pt-4 ">
+        <div class="overflow-y-auto h-96">
+            <div id="modal-header" class="text-start font-semibold text-l p-8 pt-4 ">
                 Detail patient :
             </div>
-            <div class="flex flex-col p-5 pb-0 ml-6">
+            <div class="flex flex-col px-8 ml-6">
                 <div class="flex flex-row mb-5">
                     <label class="text-sm text-slate-600 font-semibold mb-1">First Name: </label>
                     <label class="text-sm text-slate-900 font-semibold mb-1 mx-4" > <?=$patient['first_name']?></label>
@@ -162,14 +161,14 @@ include('../includes/admin-sidebar.php');
                 </div>
                 <div class="flex flex-row mb-5">
                     <label class="text-sm text-slate-600 font-semibold mb-1">Date of Birth: </label>
-                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4" id="date_of_birth"><?=$patient['first_name']?></label>
+                    <label class="text-sm text-slate-900 font-semibold mb-1 mx-4" id="date_of_birth"><?=$patient['date_of_birth']?></label>
                 </div>
             </div>
             <hr>
             <div class="flex flex-col p-5 pb-0 ml-6">
                 <h2 class="text-start font-semibold text-l p-2 py-3">All session recorded :</h2>
                 <div class="">
-                    <table class="w-full text-left border border-slate-300 rounded-2" >
+                    <table class="w-full text-left border border-slate-300 rounded-2 mb-8" >
                         <thead class="border-b-4 border-blue-500">
                             <tr class="text-md text-black  font-medium p-3">
                                 <th scope="col" class=" p-3">
@@ -212,7 +211,7 @@ include('../includes/admin-sidebar.php');
             </div>
         </div>
         <div id="modal-footer" class="flex justify-end bg-gray-200 border-t-2 p-2 rounded-b-lg">
-            <button type="button" onclick="hide_addSession_modal()" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
+            <button type="button" onclick="hide_addSession_modal()" class="bg-blue-400 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
         </div>
     </div>
 </div>
