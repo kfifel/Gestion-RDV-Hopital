@@ -3,7 +3,7 @@
 <?php 
     $GLOBALS['page_title']="Admin Schedule";
     require '../includes/head.php';
-    require '../controller/Admin.controller.php';
+    require '../controller/Admin.controller.php';viewSession();
     // setDoctorAsOptions();
 ?>
 <body> <!-- background-color:RGBA(0,0,0,0.57); -->
@@ -59,7 +59,7 @@
                         
                         <div class="mr-6 w-2/6">
                             <label for="session-doctor-filter" class="font-semibold mr-1 w-2/6">Doctor:</label>
-                            <select name="session-doctor-filter" class="border-[1px] rounded w-5/6 h-[2.6rem]">
+                            <select name="session-doctor-filter" class="border-[1px] rounded w-5/6 h-[2.6rem] pl-2">
                                 <option value="" selected disabled >Choose a doctor name</option>
                                 <?php setDoctorAsOptions();?>
                             </select>
@@ -145,6 +145,16 @@
         </div>
     </div>
     <!-- END MODAL -->
+    <!-- VIEW SESSION MODAL -->
+    <div id="view-sessionn-modal" class=""style="display:none;">
+        <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
+        <div id="modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40 " style="left:35%;">
+            <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
+                View Session
+            </div>
+            <?php if( isset($_GET['view-session']) ) viewSession();?>
+        </div>
+    </div>
 <?php require_once'../includes/footer.php';?>
 </body>
 </html>

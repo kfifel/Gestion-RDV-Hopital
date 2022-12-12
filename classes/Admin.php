@@ -81,6 +81,12 @@ class Admin extends Person
             }
     }
 
+    public function getAllAppointments(){
+        $conn = Database::connect();     // :: ->  for static methods or properties 
+        $requete = "SELECT * FROM appointment"; 
+        $res = $conn->query($requete);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 
