@@ -4,75 +4,98 @@ require_once "../includes/autoload.php";
 class Patient extends Person
 {
     private string $date_of_birth;
-    private $conn;
 
-    public function __construct(int|null $id, string $first_name, string $last_name, string $email, string $password, string $date_of_birth, string $role='patient')
+    public function __construct($id, string $first_name, string $last_name, string $email, string $password, string $date_of_birth, string $role='patient')
     {
-        $this->conn = Database::connect();
         $this->date_of_birth = $date_of_birth;
         parent::__construct($id, $first_name, $last_name, $email, hash("sha256", $password), $role);
     }
 
-    public function takeAppointment()
-    {
 
+    public function getDateOfBirth(){
+        return $this->date_of_birth;
+    }
+    public function setDateOfBirth($date_of_birth){
+        $this->date_of_birth = $date_of_birth;
     }
 
-    public function createPatient(): array
-    {
-        $query = "INSERT INTO Person ( `first_name`, `last_name`, `email`, `password`, `role`) VALUES (?, ?, ?, ?, ?)";
-        $sth = $this->conn->prepare($query);
-        $resp = $sth->execute(array( $this->first_name, $this->last_name, $this->email,$this->password, $this->role ));
-        if($resp){
-            $query1 = "SELECT `id` from `Person` where `email` = '$this->email' and `password` = '$this->password'";
-            $sth1 = $this->conn->prepare($query1);
-            $sth1->execute();
-            $resp1 = $sth1->fetch();
-            $id_Person_added = $resp1['id'];
-            $query2 = "INSERT INTO Patient (id, date_of_birth) VALUES ( $id_Person_added,'$this->date_of_birth') ";
-            $sth2 = $this->conn->prepare($query2);
-            $res = $sth2->execute();
-            if($res)
-                return (array(true));
-            else
-                return array(false ,$sth->errorInfo());
+    public function deleteProfilePatient():bool{
+        try {
+            $query = "SELECT id as `id_appointment`,id_session, date as 'date_appointment'  FROM `appointment` WHERE `id_patient` = $this->id";
+            $result_appointments = Database::connect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($result_appointments as $value) {
+                if($value['date_appointment'] >= date("Y-m-d")){
+                    $id_session = $value['id_session'];
+                    Database::connect()->query("UPDATE Session SET `max_patient` = max_patient+1 WHERE `id` like $id_session");
+                }
+                $id_appointment = $value['id_appointment'];
+                Database::connect()->query("DELETE from appointment where id like $id_appointment");
+            }
+            $id_patient = $this->id;
+            $query1 = "DELETE  FROM `patient` WHERE `id` = $this->id";
+            Database::connect()->query($query1);
+            Database::disconnect();
+            return true;
+        } catch (Exception $e) {
+            return false;
         }
-        return array(false ,$sth->errorInfo());
-    }
 
-    public static function getAllPatients(): bool|array
-    {
-        $conn = Database::connect();
-        
-        $query = "SELECT pr.*, pt.date_of_birth FROM Patient pt inner join Person pr on pt.id = pr.id";
-        $sth = $conn->query($query);
-        return ($sth->fetchAll(PDO::FETCH_ASSOC));
     }
+    public function takeAppointment($id_session , $start_session_date){
 
-    public function updatePatient(): bool
-    {
-        $query = "UPDATE Person  SET `first_name`=?, `last_name`=?, `email`=?, `password`=?, `role`=?";
-        $sth = $this->conn->prepare($query);
-        return $sth->execute(array($this->first_name, $this->last_name, $this->email, $this->password, $this->role));
-    }
+        $start_session_date = date_create($start_session_date);
+        $booking_date = date_create();
+        $appointment_date = '';
 
-    public static function deletePatientById(int $id):bool{
-        $conn = Database::connect();
-        $query = "DELETE  FROM `Patient` WHERE `id` = $id";
-        $query1 = "DELETE  FROM `Person` WHERE `id` = $id";
-        if($conn->query($query)){
-             if($conn->query($query1))
-                 return true;
+
+        if($booking_date < $start_session_date){
+            $appointment_date = $start_session_date;
+        }else{
+            $appointment_date = $booking_date;
+            date_add($appointment_date,date_interval_create_from_date_string("1 days"));
         }
-        return false;
+
+        while (true) {
+            $date = date_format($appointment_date,"Y-m-d");
+            $count_query = "SELECT count(*) from appointment where id_session = $id_session and date = '$date'";
+            $result_count_query = Database::connect()->query($count_query)->fetchAll(PDO::FETCH_ASSOC);
+
+            $count_number =  $result_count_query[0]['count(*)'];
+            echo $count_number;
+            if($count_number < 4){
+                $appointment_date = date_format($appointment_date,"Y-m-d");
+
+                Database::connect()->query("INSERT INTO `appointment`(`order`, `date`, `booking_date`, `id_patient`, `id_session`) VALUES ($count_number+1,'$appointment_date',CURRENT_DATE(),$this->id,$id_session)");
+                Database::connect()->query("UPDATE `session` SET `max_patient`= max_patient - 1 WHERE `id`= $id_session");
+                break;
+            }
+            date_add($appointment_date,date_interval_create_from_date_string("1 days"));
+        }
+
+
+    }
+    public function getOldAppointment():array{
+        $conn = Database::connect();
+        $old_appointments_result = $conn->query("SELECT * FROM Appointment where id_patient like $this->id and booking_date < CURRENT_DATE()")->fetchAll(PDO::FETCH_ASSOC);
+        return $old_appointments_result;
+    }
+
+    public function editProfilePatient():bool{
+        //please edite patient object with setters then call this methode ot update changes to database!
+        try {
+            $query = "UPDATE `patient` SET `first_name`='$this->first_name',`last_name`='$this->last_name',`email`='$this->email',`password`='$this->password',`date_of_birth`='$this->date_of_birth' WHERE `id` = $this->id";
+            Database::connect()->query($query);
+            Database::disconnect();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }
 
-//test :
-$conn = Database::connect();
-//$khalid = new Patient(null, 'khalid2', "fifel2", "pp3@p.com", '123',"2000-01-09");
-//print_r($khalid->createPatient());
-echo "<pre>";
-var_dump(Patient::deletePatientById(9));
-echo "</pre>";
+$p = new Patient(4,'karim','hamid','kara@kra','xxxxxxxxe','2020-12-11');
+$p->takeAppointment(3,'2022-12-10');
+
+
 
