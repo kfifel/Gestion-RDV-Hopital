@@ -3,7 +3,7 @@
 <?php 
     $GLOBALS['page_title']="Admin Schedule";
     require '../includes/head.php';
-    require '../controller/Admin.controller.php';viewSession();
+    require '../controller/Admin.controller.php';
     // setDoctorAsOptions();
 ?>
 <body> <!-- background-color:RGBA(0,0,0,0.57); -->
@@ -146,15 +146,7 @@
     </div>
     <!-- END MODAL -->
     <!-- VIEW SESSION MODAL -->
-    <div id="view-sessionn-modal" class=""style="display:none;">
-        <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
-        <div id="modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40 " style="left:35%;">
-            <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
-                View Session
-            </div>
-            <?php if( isset($_GET['view-session']) ) viewSession();?>
-        </div>
-    </div>
+    <?php if( isset($_GET['view-session']) ) viewSession() ?>
 <?php require_once'../includes/footer.php';?>
 </body>
 </html>

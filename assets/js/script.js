@@ -7,7 +7,3 @@ function hide_modal()
     document.querySelector('#modal-container').setAttribute("style","display:none;");
 }
 
-function showViewSession(){
-    alert("showViewSession");
-    document.querySelector('#view-sessionn-modal').removeAttribute("style");
-}

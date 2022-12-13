@@ -72,7 +72,7 @@ class Admin extends Person
             $conn=Database::connect();
             $sql="DELETE FROM `doctor` WHERE id=?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$id,$id]);
+            $stmt->execute([$id]);
             Database::disconnect();
             header('Location: ../admin-interfaces/admin-schedule.php');
             } 
@@ -83,8 +83,10 @@ class Admin extends Person
 
     public function getAllAppointments(){
         $conn = Database::connect();     // :: ->  for static methods or properties 
-        $requete = "SELECT * FROM appointment"; 
-        $res = $conn->query($requete);
+        $requete = "SELECT appointment.id, appointment.order, appointment.date, patient.first_name,patient.last_name ,session.title  FROM `appointment` 
+                    INNER JOIN `patient` on patient.id= appointment.id_patient
+                    INNER JOIN `session` on appointment.id_session = session.id"    ; 
+        $res = $conn->query($requete); 
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }
 }
