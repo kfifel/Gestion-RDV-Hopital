@@ -1,23 +1,17 @@
 <?php
 class Session
-{
+{   
+    public $id;
+    public $title;
+    public $doctor_id;
+    public $date_start;
+    public $max_patients;
 
-    private function createSession (){
-        
-    }
+    function __construct($title=null,$doctor_id=null,$date_start=null,$max_patients=null){
 
-    public function showSessions()
-    {   
-        $conn=Database::connect();
-        $sql="SELECT `title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` FROM `session` INNER JOIN doctor on id_doctor=doctor.id";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // echo "<pre>";
-        //     var_dump($result);
-        // echo "</pre>";
-        // die;
-        Database::disconnect();
-        return $result;
+        $this->title=$title;
+        $this->doctor_id=$doctor_id;
+        $this->date_start=$date_start;
+        $this->max_patients=$max_patients;
     }
 }
