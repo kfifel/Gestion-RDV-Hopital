@@ -1,6 +1,6 @@
 <?php
 
-require "../includes/autoload.php";
+require_once "../includes/autoload.php";
 class Appointment
 {
     private mixed $id;
@@ -90,11 +90,6 @@ class Appointment
                 $conn->query("UPDATE Session SET `max_patient` = max_patient+1 WHERE `id` = $this->id_session");
         }
         return false;
-    }
-
-    public function getAllAppointment():array{
-        $conn = Database::connect();
-        return $conn->query("SELECT * FROM Appointment")->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function findAppointmentById(int $id):array{
