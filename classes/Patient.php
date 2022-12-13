@@ -20,6 +20,8 @@ class Patient extends Person
     }
 
     public function deleteProfilePatient():bool{
+        // deletes patient profile but it makes sure to delete old and upcomming appointments 
+        // 
         try {
             $query = "SELECT id as `id_appointment`,id_session, date as 'date_appointment'  FROM `appointment` WHERE `id_patient` = $this->id";
             $result_appointments = Database::connect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
@@ -43,7 +45,10 @@ class Patient extends Person
 
     }
     public function takeAppointment($id_session , $start_session_date){
-
+        // this methode takes session id and its starting date it start generating your upcoming appointment date 
+        // notice that max appointment per jr is 4 appointments
+        // basically it generates a potential appointment day then it counts how many already exists in the same day
+        // if there is 4 it continues to next day etc... 
         $start_session_date = date_create($start_session_date);
         $booking_date = date_create();
         $appointment_date = '';
@@ -94,8 +99,7 @@ class Patient extends Person
     }
 }
 
-$p = new Patient(4,'karim','hamid','kara@kra','xxxxxxxxe','2020-12-11');
-$p->takeAppointment(3,'2022-12-10');
+// $p = new Patient(4,'karim','hamid','kara@kra','xxxxxxxxe','2020-12-11');
 
 
 
