@@ -1,10 +1,28 @@
 <?php 
 require('../includes/autoload.php');
+
+// include ('../admin-interfaces/admin-doctors.php');
 // ROUTING
+if( isset($_POST['add_doctor']) )  addDoctor();
+
 if( isset($_POST['create-session']) )  createSession();
 if( isset($_GET['delete-session']) )  deteSession();
 
+// $res=$doc->getAllDoctors();
 
+function addDoctor(){
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $speciality = $_POST['speciality'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $Admin = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
+    $doc = new Doctor (null,$first_name, $last_name, $email, $password, 'doctor',$speciality);
+    $addDoc=$Admin->addDoctor($doc);
+    // if($addDoc){
+        // echo "<h1 style='background-color:green;text:center;'>doctor has added <h1>";
+    // }
+}
 function createSession(){
     $title=$_POST['session-title'];
     $doctor_id=$_POST['session-doctor'];

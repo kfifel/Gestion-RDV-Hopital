@@ -11,10 +11,10 @@ class Admin extends Person{
 
     public function addDoctor(Doctor $doc){
         $conn =  Database::connect();
-        $spec = $doc->getSpeciality();
+        $speciality = $doc->getSpeciality();
         $query1= "INSERT INTO doctor (`first_name`, `last_name`, `email`, `password`, `role`, `speciality`) VALUES (?,?,?,?,?,? )";
         $sth = $conn->prepare($query1);
-        $res = $sth->execute(array( $doc->first_name, $doc->last_name, $doc->email, $doc->password, 'doctor', $spec ));
+        $res = $sth->execute(array( $doc->first_name, $doc->last_name, $doc->email, $doc->password, 'doctor', $speciality ));
         return $res;
         
     }
@@ -111,7 +111,7 @@ class Admin extends Person{
             echo 'Message: ' .$e->getMessage();
         }
     } 
-    public function getAllDoctors(){
+    static public function getAllDoctors(){
         $conn = Database::connect();     // :: ->  for static methods or properties 
         $requete = "SELECT * FROM doctor"; 
         $res = $conn->query($requete);
@@ -134,7 +134,10 @@ class Admin extends Person{
 
 }
     // // *********test*********
-    // $obj = new Admin (null,'namedoc', 'lndoc', 'doc2@doddcor.com', '123', 'admin');
+    // $obj = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
+    
+    
+    
     // $doc = new Doctor (null,'tessst', 'doc', 'doc2@dddoctr.com', '123', 'doctor',3);
     // $obj->addDoctor($doc);
 

@@ -53,7 +53,7 @@
                   </div> 
                   <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.89,4,3.01,4.9,3.01,6L3,20c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20 H5V10h14V20z M19,8H5V6h14V8z M9,14H7v-2h2V14z M13,14h-2v-2h2V14z M17,14h-2v-2h2V14z M9,18H7v-2h2V18z M13,18h-2v-2h2V18z M17,18 h-2v-2h2V18z"/></g></svg>
 
-        </div>
+            </div>
                     <!-- <div class="flex items-center justify-center border-[1px] border-neutral-200 bg-slate-100 rounded-md w-[3rem] h-[3.5rem]">
                         <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.89,4,3.01,4.9,3.01,6L3,20c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20 H5V10h14V20z M19,8H5V6h14V8z M9,14H7v-2h2V14z M13,14h-2v-2h2V14z M17,14h-2v-2h2V14z M9,18H7v-2h2V18z M13,18h-2v-2h2V18z M17,18 h-2v-2h2V18z"/></g></svg>
                     </div> -->
@@ -74,7 +74,7 @@
                          <div id="doctormodal" tabindex="-1" aria-hidden="true" class="fixed p-1 left-0 right-0 z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                         <div class="relative w-full h-full max-w-md md:h-auto">
                             <!-- Modal content -->
-                            <form  action="../controller/admin.controller.php" method="POST">
+                            <form  action="admin-doctors.php" method="POST">
                                 <div class="min-h-screen   flex flex-col justify-center ">
                                     <div class="relative py-3 max-w-xl sm:mx-auto">
                                     <div
@@ -101,10 +101,11 @@
 
                                                         <!--********* select********** -->                                
                                                             <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Speciality</label> -->
-                                                            <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                            <select id="countries" name ="speciality" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                             <option selected>Choose a speciality</option>
-                                                            <option value="1">Cardiology</option>
-                                                            <option value="2">Pediatry</option>
+                                                            <option value="1">cardio</option>
+                                                            <option value="2">Endocrinology</option>
+                                                            <option value="3">Nurse</option>
                                                             </select>
 
                                                         <div class="relative">
@@ -115,10 +116,10 @@
                                                             <input  id="password" name="password" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none borer-rose-600" placeholder="Password" />
                                                             <label class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 text-sm">Password</label>
                                                         </div>
-                                                        <div class="relative">
+                                                        <!-- <div class="relative">
                                                             <input  id="password" name="configpassword" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none borer-rose-600" placeholder="Password" />
                                                             <label class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 text-sm">Repaite Password</label>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="relative">
                                                             <button  type="submit" class="bg-blue-300 text-blue-700 rounded-md px-4 py-1">Cancel</button>
                                                             <button  type="submit" name="add_doctor" class="bg-blue-500 text-white rounded-md px-4 py-1">Add Doctor</button>
@@ -155,7 +156,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="">
+                    <tbody class="bg-blue-600">
                         <tr class="bg-white border-b text-base font-medium text-black ">
                             <th scope="row" class="py-4 px-6 font-medium ">
                                 Test Doctor
