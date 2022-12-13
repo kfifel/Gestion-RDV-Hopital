@@ -39,34 +39,50 @@ class Admin extends Person{
     // }
 // class Admin extends Person
 // {  
-    
+    public function cancelAppointment($id_appointment):bool{
+        //when we cancel an appointment we should update Session available places
+        //the function returns false if something went wrong true otherwise
+        $req = Database::connect()->query("SELECT id_session from appointment where id like $id_appointment");
+        $result_id_session = $req->fetchAll(PDO::FETCH_ASSOC);
+        isset($result_id_session[0]['id_session']) ? $id_session = $result_id_session[0]['id_session'] : $id_session = null;
+        try{           
+            Database::connect()->query("UPDATE Session SET `max_patient` = max_patient+1 WHERE `id` like $id_session");
+            Database::connect()->query("DELETE from appointment where id like $id_appointment");
+            Database::disconnect();
+
+            return true;
+        } catch (Exception $e) {
+            Database::disconnect();
+            return false;
+        }
+    }
     static public function  readSession($date=null,$doctor=null){ 
-    $conn=Database::connect();
-    if ($date==null&&$doctor==null){
-        $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
-              FROM `session` 
-              INNER JOIN doctor on id_doctor=doctor.id";
-    }
-    else {
-        if($date==null) 
-        {
+        $conn=Database::connect();
+        if ($date==null&&$doctor==null){
             $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
-              FROM `session` 
-              INNER JOIN doctor on session.id_doctor=doctor.id
-              WHERE session.id_doctor=$doctor";
+                FROM `session` 
+                INNER JOIN doctor on id_doctor=doctor.id";
         }
-        else{
-            $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
-              FROM `session` 
-              INNER JOIN doctor on session.id_doctor=doctor.id
-              WHERE date_start='$date' ";
+        else {
+            if($date==null) 
+            {
+                $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
+                FROM `session` 
+                INNER JOIN doctor on session.id_doctor=doctor.id
+                WHERE session.id_doctor=$doctor";
+            }
+            else{
+                $sql="SELECT session.id,`title`, `date_start`, `max_patient`, `first_name`as `first_name_doctor`,`last_name`as `last_name_doctor` 
+                FROM `session` 
+                INNER JOIN doctor on session.id_doctor=doctor.id
+                WHERE date_start='$date' ";
+            }
         }
-    }
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    Database::disconnect();
-    return $result;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        Database::disconnect();
+        return $result;
     }
 
     public function  createSession($MySession){
@@ -76,7 +92,7 @@ class Admin extends Person{
             $stmt=$conn->prepare($sql);
             $stmt->execute([$MySession->title,$MySession->date_start,$MySession->max_patients,$MySession->doctor_id]);
             Database::disconnect();
-            header('Location: ../admin-interfaces/admin-schedule.php');
+            // header('Location: ../admin-interfaces/admin-schedule.php');
         } catch (Exception $e) {
             die( 'Message: ' .$e->getMessage());
         }
@@ -117,9 +133,16 @@ class Admin extends Person{
     }
 
 }
-                // // *********test*********
-                // $obj = new Admin (null,'namedoc', 'lndoc', 'doc2@doddcor.com', '123', 'admin');
-                // $doc = new Doctor (null,'tessst', 'doc', 'doc2@dddoctr.com', '123', 'doctor',3);
-                // $obj->addDoctor($doc);
+    // // *********test*********
+    // $obj = new Admin (null,'namedoc', 'lndoc', 'doc2@doddcor.com', '123', 'admin');
+    // $doc = new Doctor (null,'tessst', 'doc', 'doc2@dddoctr.com', '123', 'doctor',3);
+    // $obj->addDoctor($doc);
+
+    // test 
+    // $Admin = new Admin(null,'fn','ln','email','pass','admin');
+    // $session = new Session(null,'title',null,date("Y-m-d"),10);
+    // $Admin->createSession($session);
+    // echo $Admin->cancelAppointment(37);
+
 
 
