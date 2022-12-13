@@ -6,6 +6,8 @@
     $GLOBALS['page_title']="Admin Doctors";
     include '../includes/head.php';
     include '../classes/Database.php';
+    require '../controller/Admin.controller.php';
+
     $conn = Database::connect();
         var_dump($conn);
 ?>
@@ -72,7 +74,7 @@
                          <div id="doctormodal" tabindex="-1" aria-hidden="true" class="fixed p-1 left-0 right-0 z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                         <div class="relative w-full h-full max-w-md md:h-auto">
                             <!-- Modal content -->
-                            <form action="">
+                            <form  action="../controller/admin.controller.php" method="POST">
                                 <div class="min-h-screen   flex flex-col justify-center ">
                                     <div class="relative py-3 max-w-xl sm:mx-auto">
                                     <div
@@ -118,8 +120,8 @@
                                                             <label class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 text-sm">Repaite Password</label>
                                                         </div>
                                                         <div class="relative">
-                                                            <button  type="submit" name="submit" class="bg-blue-300 text-blue-700 rounded-md px-4 py-1">Cancel</button>
-                                                            <button  type="submit" name="submit" class="bg-blue-500 text-white rounded-md px-4 py-1">ADD</button>
+                                                            <button  type="submit" class="bg-blue-300 text-blue-700 rounded-md px-4 py-1">Cancel</button>
+                                                            <button  type="submit" name="add_doctor" class="bg-blue-500 text-white rounded-md px-4 py-1">Add Doctor</button>
                                                         </div>
                                                     </div>
                                                 </div>
