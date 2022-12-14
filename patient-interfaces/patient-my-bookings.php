@@ -7,8 +7,8 @@ require "../includes/head.php";
 
 <body>
 <?php
-$GLOBALS['current_page'] = 'my_booking';
-include('../includes/doctor-sidebar.php');
+$GLOBALS['current_page'] = 'my_bookings';
+include('../includes/paitent-sidebar.php');
 ?>
 <main class="ml-64 p-6 admin-dashboard flex flex-col gap-3">
     <div class="flex   justify-between gap-5">
@@ -50,11 +50,11 @@ include('../includes/doctor-sidebar.php');
         </div>
     </form>
     <section>
-        <div class="grid xl:grid-rows-1  grid-rows-2  grid-flow-col gap-3">
+        <div class="grid xl:grid-cols-2  grid-cols-1 gap-4">
                         <div class="border-[2px] rounded-md p-4 flex flex-col pl-[2.5rem]">
                             <h5 class="text-blue-500 text-2xl font-semibold mt-2">Test Session</h5>
                             <p class="font-extralight font-semibold" style="font-family: arial;">
-                                <span class="font-bold my-6">Test Doctor</span> <br>
+                                <br>
                                 <span class="font-bold text-xl my-4"> Appointment Number : </span> <br>
                                 <span class="text-3xl font-bold my-10">01</span> <br>
                                 <cite class="my-4"> Name doctor </cite> <br>
@@ -68,7 +68,7 @@ include('../includes/doctor-sidebar.php');
                         <div class="border-[2px] rounded-md p-4 flex flex-col pl-[2.5rem]">
                             <h5 class="text-blue-500 text-2xl font-semibold mt-2">Test Session</h5>
                             <p class="font-extralight font-semibold" style="font-family: arial;">
-                                <span class="font-bold my-6">Test Doctor</span> <br>
+                                <br>
                                 <span class="font-bold text-xl my-4"> Appointment Number : </span> <br>
                                 <span class="text-3xl font-bold my-10">02</span> <br>
                                 <cite class="my-4"> Name doctor </cite> <br>
@@ -79,7 +79,6 @@ include('../includes/doctor-sidebar.php');
                                 <span class="m-[8px]">Cancel Book</span>
                             </button>
                         </div>
-
 
 
         </div>

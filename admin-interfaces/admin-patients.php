@@ -68,41 +68,26 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                                function gettAllpatients(){
+                                    return Database::connect()->query("SELECT * FROM Patient")->fetchAll(PDO::FETCH_ASSOC);
+                                }
+                            foreach (gettAllpatients() as $res ):?>
                             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    patient name
+                                    <?= $res["first_name"] ?>
                                 </td>
                                 <td class="text-sm text-gray-900 font-medium  px-6 py-4 whitespace-nowrap">
-                                    patient email
+                                    <?= $res["last_name"] ?>
                                 </td>
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                    Speciality
+                                    <?= $res["email"] ?>
                                 </td>
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                    2000-01-09
+                                    <?= $res["date_of_birth"] ?>
                                 </td>
                                 <td class="flex text-sm gap-4 px-5 text-gray-900 font-light px-4 py-4 whitespace-nowrap">
-                                    <button onclick="show_addSession_modal()" class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg>
-                                        Overview
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    patient name
-                                </td>
-                                <td class="text-sm text-gray-900 font-medium  px-6 py-4 whitespace-nowrap">
-                                    patient Email
-                                </td>
-                                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                    speciality
-                                </td>
-                                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                    2000-01-09
-                                </td>
-                                <td class="flex text-sm gap-4 px-5 text-gray-900 font-light px-4 py-4 whitespace-nowrap">
-                                    <a href="./admin-patients.php?id=2">
+                                    <a href="./admin-patients.php?id=<?= $res["id"] ?>">
                                         <button class="px-4 flex gap-4 items-center py-2 text-blue-600 rounded-md font-bold bg-blue-100">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg>
                                             Overview
@@ -110,6 +95,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                             </tbody>
                         </table>
                     </div>
@@ -132,7 +118,7 @@
     <?php
         if( isset($_GET['id'])):
             $patient = Patient::getPatientById($_GET['id']);
-            $AllSessionRecorded = Session::getAllSessionRecorded($_GET['id']);
+            $AllAppointmentsRecorded = Patient::getAllAppointmentsRecorded($_GET['id']);
     ?>
 
 <div id="modal-container" class="" style="display:none;">
@@ -166,45 +152,46 @@
             </div>
             <hr>
             <div class="flex flex-col p-5 pb-0 ml-6">
-                <h2 class="text-start font-semibold text-l p-2 py-3">All session recorded :</h2>
+                <h2 class="text-start font-semibold text-l p-2 py-3">All Appointments recorded :</h2>
                 <div class="">
                     <table class="w-full text-left border border-slate-300 rounded-2 mb-8" >
                         <thead class="border-b-4 border-blue-500">
                             <tr class="text-md text-black  font-medium p-3">
+                                <th scope="col" class="p-3 text-center">
+                                    Order
+                                </th>
                                 <th scope="col" class=" p-3">
                                     Session title
                                 </th>
                                 <th scope="col" class="p-3">
-                                    Schedule Date & Time
+                                    Schedule Date
                                 </th>
                                 <th scope="col" class="p-3 text-center">
-                                    Max num
+                                    booking date
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="">
+                        <?php
+                        if($AllAppointmentsRecorded):
+                            foreach ($AllAppointmentsRecorded as $appointment):
+
+                        ?>
                         <tr class="bg-white border-b  font-medium text-black ">
-                            <th scope="row" class="py-3 px-6 font-medium">
-                                Test Session
-                            </th>
+                            <td class="py-4 px-6 text-center">
+                                <?=$appointment["order"]?>
+                            </td>
                             <td class="py-4 px-6">
-                                2030-01-01 18:00
+                                <?=$appointment["title"]?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?=$appointment["date"]?>
                             </td>
                             <td class="py-4 px-6 text-center">
-                                50
+                                <?=$appointment["booking_date"]?>
                             </td>
                         </tr>
-                        <tr class="bg-white border-b  font-medium text-black ">
-                            <th scope="row" class="py-3 px-6 font-medium">
-                                Test Session
-                            </th>
-                            <td class="py-4 px-6">
-                                2030-01-01 18:00
-                            </td>
-                            <td class="py-4 px-6 text-center">
-                                50
-                            </td>
-                        </tr>
+                        <?php endforeach; endif;?>
                         </tbody>
                     </table>
                 </div>
