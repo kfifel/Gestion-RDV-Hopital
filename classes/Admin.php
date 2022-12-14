@@ -139,5 +139,11 @@ class Admin extends Person{
     // $Admin->createSession($session);
     // echo $Admin->cancelAppointment(37);
 
+// test 
+// $Admin = new Admin(null,'fn','ln','email','pass','admin');
+// $session = new Session(null,'title',null,date("Y-m-d"),10);
+// $Admin->createSession($session);
+// echo $Admin->cancelAppointment(37);
+
 
 

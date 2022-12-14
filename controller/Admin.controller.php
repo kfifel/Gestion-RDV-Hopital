@@ -116,4 +116,6 @@ function setDoctorAsOptions(){
 function deleteDoctor(){
     $Admin = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
     $Admin->deleteDoctor($_GET['deletebutton']);
+    // $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
+    // $admin->deleteDoctor(2);
 }

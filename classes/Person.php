@@ -3,7 +3,6 @@ require_once '../includes/autoload.php';
 
 abstract class Person
 {
-
     protected $id;
     protected string $first_name;
     protected string $last_name;
