@@ -4,13 +4,12 @@ require('../includes/autoload.php');
 // include ('../admin-interfaces/admin-doctors.php');
 // ROUTING
 if( isset($_POST['add_doctor']) )  addDoctor();
-
 if( isset($_POST['create-session']) )  createSession();
 if( isset($_GET['delete-session']) )  deteSession();
 if( isset($_GET['deletebutton']) )  deleteDoctor();
+if( isset($_POST['upbutton']) )  UpdateDoctor();
 
 // $res=$doc->getAllDoctors();
-
 function addDoctor(){
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
@@ -35,7 +34,6 @@ function addDoctor(){
         //     </th>
         //     <td class="py-4 px-6 text-center">
         //     `.$row['email'].`
-    
         //     </td>
         //     <td class="py-4 px-6 text-center">
         //     `.$row['speciality'].`
@@ -48,6 +46,23 @@ function addDoctor(){
         //     </td>
         // </tr>`;
         // }
+     }
+
+     function doctorDetails(){
+        $doctor = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
+        return $doctor->getDoctorDetails($_GET['updatebutton']);
+     }
+
+     function UpdateDoctor(){
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $speciality = $_POST['speciality'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $Admin = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
+        $doc = new Doctor ($_POST['upbutton'],$first_name, $last_name, $email, $password, 'doctor',$speciality);
+        $Admin->editDoctor($doc);
+        header('location:../admin-interfaces/admin-doctors.php');
      }
 
 function createSession(){

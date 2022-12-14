@@ -2,7 +2,7 @@
 require_once "../includes/autoload.php";
 class Doctor extends Person
 {
-    protected int $speciality;
+    public int $speciality;
 
     function __construct(?int $id, string $first_name, string $last_name, string $email, string $password, string $role, int $speciality)
     {

@@ -18,17 +18,28 @@ class Admin extends Person{
         return $res;
         
     }
-    // public function editDoctor (Doctor $doc){
-    //     $conn = Database::connect();
-    //     $query= "UPDATE `doctor` SET `first_name` = ?, `last_name`=?, email = ?, `password` = ?, `speciality` = ? 
-    //                              WHERE `id` = $doc->id";
-    //     echo $query;
-    //     $ud = $conn->prepare($query);
-    //     $res = $ud->execute(array($$doc->first_name, $doc->last_name, $doc->email, $doc->password, $doc->speciality));
-    //     Database::disconnect();
-    //     $conn = null;
-    //     return $res;
-    // }
+    public function editDoctor (Doctor $doc){
+        $conn = Database::connect();
+        $speciality = $doc->getSpeciality();
+        var_dump($speciality);
+        $query= "UPDATE `doctor` SET `first_name` = ?, `last_name`=?, email = ?, `password` = ?, `speciality` = ? 
+                                 WHERE `id` = $doc->id";
+        var_dump($query);
+        $ud = $conn->prepare($query);
+        $res = $ud->execute(array($doc->first_name, $doc->last_name, $doc->email, $doc->password, $doc->speciality));
+        Database::disconnect();
+        $conn = null;
+        return $res;
+    }
+    public function getDoctorDetails($id){
+        $conn=Database::connect();
+        $sql = "SELECT * FROM doctor
+        INNER JOIN speciality ON doctor.speciality = speciality.sid
+        WHERE id=?"; 
+        $res = $conn->prepare($sql);
+        $res->execute([$id]);
+        return $res->fetch();
+    }
  
     public function cancelAppointment($id_appointment):bool{
         //when we cancel an appointment we should update Session available places
@@ -125,13 +136,15 @@ class Admin extends Person{
     }
 
 }
-    // // *********test*********
+    // // *********test addDoctor*********
     // $obj = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
-    
-    
-    
     // $doc = new Doctor (null,'tessst', 'doc', 'doc2@dddoctr.com', '123', 'doctor',3);
     // $obj->addDoctor($doc);
+
+    // // *********test editDoctor*********
+    // $obj = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
+    // $doc = new Doctor (117,'docedit', 'DOCEDIT', 'docedit@gmail.com', '123456', 'doctor',1);
+    // $obj->editDoctor($doc);
 
     // test 
     // $Admin = new Admin(null,'fn','ln','email','pass','admin');

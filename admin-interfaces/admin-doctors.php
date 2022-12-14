@@ -71,68 +71,68 @@
                     </div>
                 </button> 
                          <!-- **********form add doctor ********-->
-                         <div id="doctormodal" tabindex="-1" aria-hidden="true" class="fixed p-1 left-0 right-0 z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                        <div class="relative w-full h-full max-w-md md:h-auto">
+                        <div id="doctormodal" tabindex="-1" aria-hidden="true" class="fixed p-1 left-0 right-0 z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+                            <div class="relative w-full h-full max-w-md md:h-auto">
                             <!-- Modal content -->
-                            <form  action="admin-doctors.php" method="POST">
-                                <div class="min-h-screen   flex flex-col justify-center ">
-                                    <div class="relative py-3 max-w-xl sm:mx-auto">
-                                    <div
-                                            class="absolute inset-0 bg-gradient-to-r from-blue-300 bto-blue-600 shadow-lg transform rounded-3xl">
-                                        </div>
-                                        <div class="relative   bg-white shadow-lg rounded-3xl sm:p-20">
-                                            <div class="max-w-md mx-auto">
-                                            <div>
-                                                    <h1 class=" flex justify-center text-2xl font-semibold">Add new doctor </h1>
-                                                </div>
+                                <form  action="admin-doctors.php" method="POST">
+                                    <div class="min-h-screen   flex flex-col justify-center ">
+                                        <div class="relative py-3 max-w-xl sm:mx-auto">
+                                        <div
+                                                class="absolute inset-0 bg-gradient-to-r from-blue-300 bto-blue-600 shadow-lg transform rounded-3xl">
+                                            </div>
+                                            <div class="relative   bg-white shadow-lg rounded-3xl sm:p-20">
+                                                <div class="max-w-md mx-auto">
                                                 <div>
-                                                <h6 class=" mb-5 text-gray-500 text-center font-semibold">Add Personal Details </h6>
-                                                </div>
-                                                <div class="divide-y divide-gray-200">
-                                                    <div class=" text-base  space-y-4 text-gray-700 text-lg leading-7">
-                                                        <div class="relative">
-                                                            <input  id="first_name" name="first_name" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 outline-none borer-rose-600" placeholder="Email address" />
-                                                            <label for="first_name" class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm  peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">first name</label>
-                                                        </div>
-                                                        <div class="relative">
-                                                            <input  id="last_name" name="last_name" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
-                                                            <label for="last_name" class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm  peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">last name</label>
-                                                        </div>                              
+                                                        <h1 class=" flex justify-center text-2xl font-semibold">Add new doctor </h1>
+                                                    </div>
+                                                    <div>
+                                                    <h6 class=" mb-5 text-gray-500 text-center font-semibold">Add Personal Details </h6>
+                                                    </div>
+                                                    <div class="divide-y divide-gray-200">
+                                                        <div class=" text-base  space-y-4 text-gray-700 text-lg leading-7">
+                                                            <div class="relative">
+                                                                <input  id="first_name" name="first_name" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 outline-none borer-rose-600" placeholder="Email address" />
+                                                                <label for="first_name" class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm  peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">first name</label>
+                                                            </div>
+                                                            <div class="relative">
+                                                                <input  id="last_name" name="last_name" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
+                                                                <label for="last_name" class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm  peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">last name</label>
+                                                            </div>                              
 
-                                                        <!--********* select********** -->                                
-                                                            <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Speciality</label> -->
-                                                            <select id="countries" name ="speciality" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            <option selected>Choose a speciality</option>
-                                                            <option value="1">cardio</option>
-                                                            <option value="2">Endocrinology</option>
-                                                            <option value="3">Nurse</option>
-                                                            </select>
+                                                            <!--********* select********** -->                                
+                                                                <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Speciality</label> -->
+                                                                <select id="countries" name ="speciality" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                <option selected>Choose a speciality</option>
+                                                                <option value="1">cardio</option>
+                                                                <option value="2">Endocrinology</option>
+                                                                <option value="3">Nurse</option>
+                                                                </select>
 
-                                                        <div class="relative">
-                                                            <input  id="email" name="email" type="email" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
-                                                            <label for="email" class=" ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm  peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
-                                                        </div>
-                                                        <div class="relative">
-                                                            <input  id="password" name="password" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none borer-rose-600" placeholder="Password" />
-                                                            <label class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 text-sm">Password</label>
-                                                        </div>
-                                                        <!-- <div class="relative">
-                                                            <input  id="password" name="configpassword" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none borer-rose-600" placeholder="Password" />
-                                                            <label class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 text-sm">Repaite Password</label>
-                                                        </div> -->
-                                                        <div class="relative">
-                                                            <button  type="submit" class="bg-blue-300 text-blue-700 rounded-md px-4 py-1">Cancel</button>
-                                                            <button  type="submit" name="add_doctor" class="bg-blue-500 text-white rounded-md px-4 py-1">Add Doctor</button>
+                                                            <div class="relative">
+                                                                <input  id="email" name="email" type="email" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
+                                                                <label for="email" class=" ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm  peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
+                                                            </div>
+                                                            <div class="relative">
+                                                                <input  id="password" name="password" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none borer-rose-600" placeholder="Password" />
+                                                                <label class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 text-sm">Password</label>
+                                                            </div>
+                                                            <!-- <div class="relative">
+                                                                <input  id="password" name="configpassword" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none borer-rose-600" placeholder="Password" />
+                                                                <label class="ml-4 absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 text-sm">Repaite Password</label>
+                                                            </div> -->
+                                                            <div class="relative">
+                                                                <button  type="submit" class="bg-blue-300 text-blue-700 rounded-md px-4 py-1">Cancel</button>
+                                                                <button  type="submit" name="add_doctor" class="bg-blue-500 text-white rounded-md px-4 py-1">Add Doctor</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> 
+                                </form>
+                            </div>
+                        </div> 
 
                          <!-- ******* end form***** -->
             </div>
@@ -173,7 +173,7 @@
 
                             </td>
                             <td class="flex items-center justify-center py-4 px-6 space-x-3">
-                                <button><div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg><span>Edit</span></div></button>
+                                <a href="edit-doctor.php?updatebutton=<?= $doc['id']; ?>"><div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg><span>Edit</span></div></a>
                                 <button><div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg><span>View</span></div></button>
                                 <a href="../controller/Admin.controller.php?deletebutton=<?= $doc['id']; ?>"   ><div  class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/></svg><span>Remove</span></div></a>
                             </td>                 
@@ -186,6 +186,7 @@
             
         </div>
     </div>
+    
     <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
 
 </body>
