@@ -18,14 +18,6 @@ class Admin extends Person{
         return $res;
         
     }
-
-    // public function  getAllDoctors(int $id){
-    //     $conn = Database::connect();
-    //     $res = $conn->query("SELECT * FROM doctor WHERE id = $id");
-    //     $res = $res->fetchAll(PDO::FETCH_ASSOC);
-
-    // }
-
     // public function editDoctor (Doctor $doc){
     //     $conn = Database::connect();
     //     $query= "UPDATE `doctor` SET `first_name` = ?, `last_name`=?, email = ?, `password` = ?, `speciality` = ? 
@@ -37,8 +29,7 @@ class Admin extends Person{
     //     $conn = null;
     //     return $res;
     // }
-// class Admin extends Person
-// {  
+ 
     public function cancelAppointment($id_appointment):bool{
         //when we cancel an appointment we should update Session available places
         //the function returns false if something went wrong true otherwise
@@ -113,7 +104,8 @@ class Admin extends Person{
     } 
     static public function getAllDoctors(){
         $conn = Database::connect();     // :: ->  for static methods or properties 
-        $requete = "SELECT * FROM doctor"; 
+        $requete = "SELECT * FROM doctor
+                    INNER JOIN speciality ON doctor.speciality = speciality.sid"; 
         $res = $conn->query($requete);
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -125,7 +117,7 @@ class Admin extends Person{
             $stmt = $conn->prepare($sql);
             $stmt->execute([$id]);
             Database::disconnect();
-            header('Location: ../admin-interfaces/admin-schedule.php');
+            header('Location: ../admin-interfaces/admin-doctors.php');
             } 
             catch (Exception $e) {
                 echo 'Message: ' .$e->getMessage();
