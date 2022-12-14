@@ -6,7 +6,7 @@
 
     if (isset($_POST["save"])) {
         $me = new Patient(1, $_POST["first_name"], $_POST["last_name"], $_POST["email"], $_POST["password"], "patient", "2022-12-12");
-        $me->addPatient();
+        // $me->addPatient();
     }
 
 class Authentification
