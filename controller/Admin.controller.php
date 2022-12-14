@@ -1,5 +1,6 @@
 <?php 
-require('../includes/autoload.php');
+require_once('../includes/autoload.php');
+// include('../classes/Person.php');
 // ROUTING
 if( isset($_POST['create-session']) )  createSession();
 if( isset($_GET['delete-session']) )  deteSession();
@@ -19,7 +20,6 @@ function deteSession(){
     $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $admin->deleteSession($_GET['delete-session']);
 }
-
 function readSession(){
     $date = isset($_POST['session-date-filter']) ? $_POST['session-date-filter'] : null;
     $doctor = isset($_POST['session-doctor-filter']) ? $_POST['session-doctor-filter'] : null;
@@ -72,3 +72,53 @@ function deleteDoctor(){
     $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $admin->deleteDoctor(2);
 }
+function dateAfterWeek(){
+    $date = date_create();
+    date_add($date,date_interval_create_from_date_string("7 days"));
+    return $date;
+}
+function sessionsPerWeek(){
+    $sessions = Admin::readSession();
+    $today = date("Y-m-d");
+    $nextWeekDay = date_format(dateAfterWeek(),"Y-m-d");
+    foreach ($sessions as $row) {
+        if($today <= $row['date_start'] && $row['date_start'] <= $nextWeekDay){
+            $title = $row['title'];
+            $date_start = $row['date_start'];
+            $first_name_doctor = $row['first_name_doctor'];
+            $last_name_doctor = $row['last_name_doctor'];
+            echo "
+                <tr class='border-2 border-sky-50'>
+                    <td class='text-center py-2 '>$title</td>
+                    <td class='text-center py-2 '>$first_name_doctor $last_name_doctor</td>
+                    <td class='text-center py-2 '>$date_start</td>
+                </tr>
+            ";
+        }
+    }
+}
+function appointmentPerWeek(){
+    $Admin = new Admin(null,'fn','ln','email','pass','admin');
+    $_SESSION['user'] = $Admin;
+
+    $appointments = $_SESSION['user']->getAllAppointments();
+    $today = date("Y-m-d");
+    $nextWeekDay = date_format(dateAfterWeek(),"Y-m-d");
+    foreach ($appointments as $row){
+        if($today <= $row['Appointment Date'] && $row['Appointment Date'] <= $nextWeekDay){
+            $appointment_number = $row['Appointment Number'];
+            $patient_name = $row['Patient Name'];
+            $doctor = $row['Doctor'];
+            $session = $row['Session Title'];
+            echo "
+                <tr class='border-2 border-sky-50'>
+                    <td class='text-center py-3'>$appointment_number</td>
+                    <td class='text-center py-3'>$patient_name</td>
+                    <td class='text-center py-3'>$doctor</td>
+                    <td class='text-center py-3'>$session</td>
+                </tr>
+            ";
+        }
+    }
+}
+

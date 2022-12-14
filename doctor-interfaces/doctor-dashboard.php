@@ -4,6 +4,7 @@
     <?php
         $GLOBALS['page_title'] = 'Doctor Dashboard';
         include('../includes/head.php');
+        require_once '../controller/Admin.controller.php';
     ?>
 </head>
 <body>
@@ -40,7 +41,7 @@
                 <div class="status flex justify-between flex-wrap gap-2 px-4">
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">1</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('CountDoctor') ?></span>
                             <span class="block">Doctors</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -49,7 +50,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">3</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('CountPatient') ?></span>
                             <span class="block">Patients</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -58,7 +59,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">0</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('NewBooking') ?></span>
                             <span class="block">New Booking</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -67,7 +68,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">0</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('TodaySession') ?></span>
                             <span class="block">Today's session</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">

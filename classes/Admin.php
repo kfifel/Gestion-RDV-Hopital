@@ -96,14 +96,28 @@ class Admin extends Person
             echo 'Message: ' .$e->getMessage();
         }
     }
+    function getAllAppointments(){
+        $conn = Database::connect();
+        $requete = "select concat(p.first_name ,' ', p.last_name) as 'Patient Name', app.order as 'Appointment Number' , concat(d.first_name ,' ', d.last_name) as 'Doctor' , s.title as 'Session Title' , s.date_start as 'Session date' , app.date 'Appointment Date'
+        from patient as p, appointment as app, session as s , doctor d
+        where p.id = app.id_patient 
+        and app.id_session = s.id
+        and s.id_doctor = d.id"; 
+        $res = $conn->query($requete);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 
 // test 
 // $Admin = new Admin(null,'fn','ln','email','pass','admin');
+// var_dump($Admin->getAllAppointments());
+// $_SESSION['user'] = $Admin;
 // $session = new Session(null,'title',null,date("Y-m-d"),10);
 // $Admin->createSession($session);
 // echo $Admin->cancelAppointment(37);
+// var_dump(Admin::readSession());
+
 
 
 
