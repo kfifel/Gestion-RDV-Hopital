@@ -21,10 +21,10 @@ class Admin extends Person{
     public function editDoctor (Doctor $doc){
         $conn = Database::connect();
         $speciality = $doc->getSpeciality();
-        var_dump($speciality);
+        // var_dump($speciality);
         $query= "UPDATE `doctor` SET `first_name` = ?, `last_name`=?, email = ?, `password` = ?, `speciality` = ? 
                                  WHERE `id` = $doc->id";
-        var_dump($query);
+        // var_dump($query);
         $ud = $conn->prepare($query);
         $res = $ud->execute(array($doc->first_name, $doc->last_name, $doc->email, $doc->password, $doc->speciality));
         Database::disconnect();
