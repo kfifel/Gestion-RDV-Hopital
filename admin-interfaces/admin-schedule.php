@@ -42,7 +42,7 @@
                 <!-- ADD SESSION GOES HERE -->
                 <div id="schedule-session" class="flex justify-start items-center mt-9">
                     <h3 class="text-xl font-semibold">Schedule a Session</h3>
-                    <button type="button" onclick="show_modal()" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6">
+                    <button type="button" onclick="show_modal('modal-container')"  class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6" >
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                         <span>Add a Session</span>
                     </button>
@@ -59,7 +59,7 @@
                         
                         <div class="mr-6 w-2/6">
                             <label for="session-doctor-filter" class="font-semibold mr-1 w-2/6">Doctor:</label>
-                            <select name="session-doctor-filter" class="border-[1px] rounded w-5/6 h-[2.6rem]">
+                            <select name="session-doctor-filter" class="border-[1px] rounded w-5/6 h-[2.6rem] pl-2">
                                 <option value="" selected disabled >Choose a doctor name</option>
                                 <?php setDoctorAsOptions();?>
                             </select>
@@ -99,13 +99,11 @@
                         </tbody>
                     </table>
                 </div>
-    
-                
             </div>
         </div>
     </div>
     <!-- ADD SESSION MODAL GOEs HERE  -->
-    <div id="modal-container" class=""style="display:none;">
+    <div id="modal-container" class="" style="display:none;">
         <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
         <div id="modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40 " style="left:35%;">
             <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
@@ -138,13 +136,15 @@
 
                 </div>
                 <div id="modal-footer" class="flex justify-end bg-gray-200 border-t-2 p-2 rounded-b-lg w-100">
-                    <button type="button" onclick="hide_modal()" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
+                    <button type="button" onclick="hide_modal('modal-container')" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
                     <button type="submit" class="bg-blue-500 rounded-md w-24 h-[2.5rem] text-white ml-4" name="create-session">Submit</button>
                 </div>
             </form>
         </div>
     </div>
     <!-- END MODAL -->
+    <!-- VIEW SESSION MODAL -->
+    <?php if( isset($_GET['view-session']) ) viewSession() ?>
 <?php require_once'../includes/footer.php';?>
 </body>
 </html>

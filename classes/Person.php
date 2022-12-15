@@ -2,12 +2,13 @@
 require_once '../includes/autoload.php';
 abstract class Person
 {
-    protected $id;
+    protected int $id;
     protected string $first_name;
     protected string $last_name;
     protected string $email;
     protected string $password;
     protected string $role;
+
 
     public function __construct($id, string $first_name, string $last_name, string $email, string $password, string $role)
     {

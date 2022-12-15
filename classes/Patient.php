@@ -10,7 +10,24 @@ class Patient extends Person
         $this->date_of_birth = $date_of_birth;
         parent::__construct($id, $first_name, $last_name, $email, hash("sha256", $password), $role);
     }
-
+    function getAllDoctors(){
+        $conn = Database::connect();     // :: ->  for static methods or properties
+        $requete = "SELECT * FROM doctor";
+        $res = $conn->query($requete);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getAllSessions(){
+        $conn = Database::connect();     // :: ->  for static methods or properties
+        $requete = "SELECT * FROM session";
+        $res = $conn->query($requete);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function addPatient(){
+        $conn = Database::connect();     // :: ->  for static methods or properties
+        $requete = "INSERT INTO patient ( `first_name`, `last_name`, `email`, `password`,`role`,`date_of_birth`) VALUES ( ?, ?, ?, ?, ?, ?) ";
+        $sth = $conn->prepare($requete);
+        return $sth->execute(array($this->first_name,$this->last_name,$this->email,$this->password, 'patient', $this->date_of_birth ));
+    }
 
     public function getDateOfBirth(){
         return $this->date_of_birth;

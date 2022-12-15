@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<form method="post" action="./controller/Authentification.php" name="loginform">
+<form method="post" action="./controller/authentification.controller.php" name="loginform">
     <div class="min-h-screen  flex flex-col justify-center ">
         <div class="relative py-3 max-w-xl mx-auto">
             <div
@@ -47,7 +47,12 @@
                             <div>
                                 <h6 class=" flex justify-center text-gray-500 font-semibold text-xs">Don't have an
                                     account ? <a href="SingUp.php" class="text-black font-bold	">Sing Up</a></h6>
-                                <?=@$_SESSION['message']?>
+                                <p class="font-bold text-red-400">
+                                    <?php
+                                        echo @$_SESSION['message'];
+                                        unset($_SESSION['message']);
+                                    ?>
+                                </p>
                             </div>
                         </div>
                     </div>

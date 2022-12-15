@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<form method="post" action="test.php" name="registerform">
+<form method="post" action="./controller/authentification.controller.php" name="registerform">
 <div class="min-h-screen   flex flex-col justify-center ">
         <div class="relative py-3 max-w-xl sm:mx-auto">
         <div
