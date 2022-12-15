@@ -22,7 +22,7 @@
             <div class="date flex gap-2">
                 <div class="font-bold">
                     <small class="block text-slate-500 text-right">Today's Date</small>
-                    <span class="">2022-20-11</span>
+                    <span class=""><?=date('Y-m-d')?></span>
                 </div>
                 <div class="h-11 w-11 flex justify-center items-center border-2 rounded bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.89,4,3.01,4.9,3.01,6L3,20c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20 H5V10h14V20z M19,8H5V6h14V8z M9,14H7v-2h2V14z M13,14h-2v-2h2V14z M17,14h-2v-2h2V14z M9,18H7v-2h2V18z M13,18h-2v-2h2V18z M17,18 h-2v-2h2V18z"/></g></svg>
@@ -36,20 +36,10 @@
             All Appointments <span>(2)</span>
         </h6>
         <form action="#" method="post">
-            <div class="flex items-center ml-2 border rounded p-3">
-                <div class ="items-center mx-2 px-2">
+            <div class="flex items-center ml-2 border rounded p-1">
+                <div class ="border-[1px] rounded w-5/6 h-[2.6rem]">
                     <label for="date" class="ml-16"> Date:</label>
-                    <input class="py-1 px-10 border rounded" type="date" name="date" id="date">
-                </div>
-                <div class="items-center border rounded px-2 mx-2">
-                    <label for="doctor" class="ml-20">Doctor: </label>
-                    <select class=" py-1 px-4 rounded" name="doctor" id="doctor">
-                        <option class="text-gray-50" value="">Choose Doctor Name</option>
-                        <option value="1">Psychiatrie</option>
-                        <option value="2">Pediatrie</option>
-                        <option value="3">Cardioogie</option>
-                    </select>
-
+                    <input class="py-1 px-10 border rounded " type="date" name="date" id="date">
                 </div>
                 <div class="ml-auto">
                     <button type="submit" class=" flex gap-2 px-8 py-2 text-blue-600 rounded-md font-bold bg-blue-100" >
