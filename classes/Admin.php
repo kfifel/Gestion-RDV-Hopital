@@ -124,7 +124,7 @@ class Admin extends Person{
                 echo 'Message: ' .$e->getMessage();
             }
     }
-    function getAllAppointments(){
+    function getAllAppointment(){
         $conn = Database::connect();
         $requete = "select concat(p.first_name ,' ', p.last_name) as 'Patient Name', app.order as 'Appointment Number' , concat(d.first_name ,' ', d.last_name) as 'Doctor' , s.title as 'Session Title' , s.date_start as 'Session date' , app.date 'Appointment Date'
         from patient as p, appointment as app, session as s , doctor d

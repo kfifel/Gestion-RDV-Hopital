@@ -17,7 +17,7 @@ function addDoctor(){
     $speciality = $_POST['speciality'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $Admin = $_SESSION['admin']; 
+    $Admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $doc = new Doctor (null,$first_name, $last_name, $email, $password, 'doctor',$speciality);
     $addDoc=$Admin->addDoctor($doc);
     // if($addDoc){
@@ -56,13 +56,13 @@ function createSession(){
     $date=$_POST['session-date'];
     $max_patients=$_POST['session-patients'];
     $MySession= new Session($title,$doctor_id,$date,$max_patients);
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $admin->createSession($MySession);
     header('Location: ../admin-interfaces/admin-schedule.php');
 }
 
 function deteSession(){
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $admin->deleteSession($_GET['delete-session']);
     header('Location: ../admin-interfaces/admin-schedule.php');
 }
@@ -106,7 +106,7 @@ function readSession(){
     unset($_POST['session-doctor-filter']);
 }
 function setDoctorAsOptions(){
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $MyDoctors=$admin->getAllDoctors();
     foreach($MyDoctors as $doctor)
     {   
@@ -115,14 +115,14 @@ function setDoctorAsOptions(){
     }
 }
 function deleteDoctor(){
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $admin->deleteDoctor($_GET['deletebutton']);
     header('Location: ../admin-interfaces/admin-schedule.php');
 }
 function viewSession(){
     $modal_id="view-sessionn-modal";
     $session=strtolower($_GET['view-session']);
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $MyAppoits=$admin->getAllAppointments();
     echo '  <div id="view-sessionn-modal" class="">
                 <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
@@ -172,7 +172,7 @@ function appointmentPerWeek(){
     $Admin = new Admin(null,'fn','ln','email','pass','admin');
     $_SESSION['admin'] = $Admin;
 
-    $appointments = $_SESSION['admin']->getAllAppointments();
+    $appointments = $_SESSION['admin']->getAllAppointment();
     $today = date("Y-m-d");
     $nextWeekDay = date_format(dateAfterWeek(),"Y-m-d");
     $weekAppointment = array();

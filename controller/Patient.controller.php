@@ -6,8 +6,8 @@ if(isset($_GET['idApp'])) cancelApp();
 
 function myAppointments(){
     $p = new Patient(4,'karim','hamid','kara@kra','xxxxxxxxe','2020-12-11');
-    $_SESSION['user'] = $p;
-    $myAppoint = $_SESSION['user']->getMyAppointment();
+    $_SESSION['patient'] = $p;
+    $myAppoint = $_SESSION['patient']->getMyAppointment();
     return $myAppoint;
 }
 
