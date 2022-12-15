@@ -14,11 +14,13 @@ function createSession(){
     $MySession= new Session($title,$doctor_id,$date,$max_patients);
     $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $admin->createSession($MySession);
+    header('Location: ../admin-interfaces/admin-schedule.php');
 }
 
 function deteSession(){
     $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $admin->deleteSession($_GET['delete-session']);
+    header('Location: ../admin-interfaces/admin-schedule.php');
 }
 
 function readSession(){
@@ -72,9 +74,11 @@ function setDoctorAsOptions(){
 function deleteDoctor(){
     $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $admin->deleteDoctor(2);
+    header('Location: ../admin-interfaces/admin-schedule.php');
 }
 
 function viewSession(){
+    $modal_id="view-sessionn-modal";
     $session=strtolower($_GET['view-session']);
     $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $MyAppoits=$admin->getAllAppointments();
@@ -84,37 +88,24 @@ function viewSession(){
                         <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
                             '.$_GET['view-session'].'
                         </div>  ';
-    echo '              <div class="flex flex-col justify-between h-24" style="border :solid red;">';
+    echo '              <div class="flex flex-col justify-between h-[20rem] px-4">';
     echo  '                 <div>';
     foreach ($MyAppoits as $row) {
 
         if($row['title']==$session )
         {   
-            echo '<span class="font-semibold">Patient :</span>  ';
-            echo'<span>'.$row["last_name"]." ".$row["first_name"].'</span>';
-            echo'<br>'; 
-            echo '<span class="font-semibold">Date :</span>  ';
-            echo'<span>'.$row["date"].'</span>';
-            echo'<br>';                   
+            echo '              <span class="font-semibold">Patient :</span>  ';
+            echo'               <span>'.$row["last_name"]." ".$row["first_name"].'</span>';
+            echo'               <br>'; 
+            echo '              <span class="font-semibold">Date :</span>  ';
+            echo'               <span>'.$row["date"].'</span>';
+            echo                '<br>';                   
         }
     }
     echo  '                 </div>';
-    echo '                  <button class="flex justify-between bg-red-600 rounded-md text-white p-1 pl-3 pr-3 w-[5rem] ml-6 font-semibold">Cancel</button>
+    echo '                <button class="bg-red-600 rounded-md text-white p-1 pl-3 pr-3 w-[5rem] font-semibold" onclick="hide_modal()">Cancel</button>
                         </div>
                 </div>
-            </div>';
+            </div>' ;
     unset($_GET['view-session']);
 }
-
-// foreach ($MyAppoits as $row) {
-
-//     if($row['title']==$session )
-//     {   
-//         echo '<span class="font-semibold">Patient :</span>  ';
-//         echo'<span>'.$row["last_name"]." ".$row["first_name"].'</span>';
-//         echo'<br>'; 
-//         echo '<span class="font-semibold">Date :</span>  ';
-//         echo'<span>'.$row["date"].'</span>';
-//         echo'<br>';                   
-//     }
-// }

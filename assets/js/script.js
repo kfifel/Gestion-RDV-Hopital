@@ -6,6 +6,8 @@ function show_modal(e)
 function hide_modal(e)
 {
     let element =e;
-    document.querySelector('#'+element).setAttribute("style","display:none;");
+    if(element==null) document.querySelector('#view-sessionn-modal').setAttribute("style","display:none;");
+    else document.querySelector('#'+element).setAttribute("style","display:none;");
+    
 }
 

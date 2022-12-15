@@ -42,7 +42,6 @@ class Admin extends Person
             $stmt=$conn->prepare($sql);
             $stmt->execute([$MySession->title,$MySession->date_start,$MySession->max_patients,$MySession->doctor_id]);
             Database::disconnect();
-            header('Location: ../admin-interfaces/admin-schedule.php');
         } catch (Exception $e) {
             die( 'Message: ' .$e->getMessage());
         }
@@ -55,7 +54,6 @@ class Admin extends Person
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
         Database::disconnect();
-        header('Location: ../admin-interfaces/admin-schedule.php');
         } 
         catch (Exception $e) {
             echo 'Message: ' .$e->getMessage();
@@ -74,7 +72,6 @@ class Admin extends Person
             $stmt = $conn->prepare($sql);
             $stmt->execute([$id]);
             Database::disconnect();
-            header('Location: ../admin-interfaces/admin-schedule.php');
             } 
             catch (Exception $e) {
                 echo 'Message: ' .$e->getMessage();
