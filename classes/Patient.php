@@ -97,6 +97,19 @@ class Patient extends Person
             return false;
         }
     }
+
+    public static function getPatientById(int $id):array{
+        return Database::connect()->query("SELECT * FROM Patient where id = $id")->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAllAppointmentsRecorded(int $id):array{
+        return Database::connect()->query("
+                SELECT a.`order` as `order`, a.`date` as `date`, s.title as title, a.booking_date as booking_date
+                FROM Appointment a 
+                    inner join session s on a.id_session = s.id
+                            where a.id_patient = $id
+                ")->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 // $p = new Patient(4,'karim','hamid','kara@kra','xxxxxxxxe','2020-12-11');

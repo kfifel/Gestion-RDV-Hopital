@@ -153,7 +153,18 @@
             <hr>
             <div class="flex flex-col p-5 pb-0 ml-6">
                 <h2 class="text-start font-semibold text-l p-2 py-3">All Appointments recorded :</h2>
-                <div class="">
+                <div class="mb-6">
+                    <?php if(!count($AllAppointmentsRecorded)): ?>
+                    <div role="alert">
+                        <div class="bg-yellow-500 text-white font-bold rounded-t px-4 py-2">
+
+                        </div>
+                        <div class="border border-t-0 border-black-400 rounded-b bg-yellow-100 px-4 py-3 text-black-700">
+                            <p>there is no appointment for this patient.</p>
+                        </div>
+                    </div>
+                    <?php else: ?>
+
                     <table class="w-full text-left border border-slate-300 rounded-2 mb-8" >
                         <thead class="border-b-4 border-blue-500">
                             <tr class="text-md text-black  font-medium p-3">
@@ -173,9 +184,7 @@
                         </thead>
                         <tbody class="">
                         <?php
-                        if($AllAppointmentsRecorded):
-                            foreach ($AllAppointmentsRecorded as $appointment):
-
+                            foreach($AllAppointmentsRecorded as $appointment):
                         ?>
                         <tr class="bg-white border-b  font-medium text-black ">
                             <td class="py-4 px-6 text-center">
