@@ -7,6 +7,7 @@ if( isset($_POST['add_doctor']) )  addDoctor();
 
 if( isset($_POST['create-session']) )  createSession();
 if( isset($_GET['delete-session']) )  deteSession();
+if( isset($_GET['view-session']) )  viewSession();
 if( isset($_GET['deletebutton']) )  deleteDoctor();
 
 // $res=$doc->getAllDoctors();
@@ -17,7 +18,7 @@ function addDoctor(){
     $speciality = $_POST['speciality'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $Admin = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
+    $Admin = $_SESSION['admin']; 
     $doc = new Doctor (null,$first_name, $last_name, $email, $password, 'doctor',$speciality);
     $addDoc=$Admin->addDoctor($doc);
     // if($addDoc){
@@ -35,7 +36,7 @@ function addDoctor(){
         //     </th>
         //     <td class="py-4 px-6 text-center">
         //     `.$row['email'].`
-    
+
         //     </td>
         //     <td class="py-4 px-6 text-center">
         //     `.$row['speciality'].`
@@ -56,13 +57,15 @@ function createSession(){
     $date=$_POST['session-date'];
     $max_patients=$_POST['session-patients'];
     $MySession= new Session($title,$doctor_id,$date,$max_patients);
-    $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
+    $admin = $_SESSION['admin']; 
     $admin->createSession($MySession);
+    header('Location: ../admin-interfaces/admin-schedule.php');
 }
 
 function deteSession(){
-    $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
+    $admin = $_SESSION['admin']; 
     $admin->deleteSession($_GET['delete-session']);
+    header('Location: ../admin-interfaces/admin-schedule.php');
 }
 
 function readSession(){
@@ -87,7 +90,7 @@ function readSession(){
                     '.$row['max_patient'].'
                 </td>
                 <td class="flex items-center py-4 px-6 space-x-3">
-                    <a href="">
+                    <a href="?view-session='.$row['title'].'">
                         <div class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-[7rem] h-[2.5rem] text-lg font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1b62b3"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg><span>View</span>
                         </div>
@@ -105,7 +108,7 @@ function readSession(){
     unset($_POST['session-doctor-filter']);
 }
 function setDoctorAsOptions(){
-    $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
+    $admin = $_SESSION['admin']; 
     $MyDoctors=$admin->getAllDoctors();
     foreach($MyDoctors as $doctor)
     {   
@@ -114,8 +117,40 @@ function setDoctorAsOptions(){
     }
 }
 function deleteDoctor(){
-    $Admin = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
-    $Admin->deleteDoctor($_GET['deletebutton']);
-    // $admin= new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
-    // $admin->deleteDoctor(2);
+    $admin = $_SESSION['admin']; 
+    $admin->deleteDoctor($_GET['deletebutton']);
+    header('Location: ../admin-interfaces/admin-schedule.php');
+}
+
+function viewSession(){
+    $modal_id="view-sessionn-modal";
+    $session=strtolower($_GET['view-session']);
+    $admin = $_SESSION['admin']; 
+    $MyAppoits=$admin->getAllAppointments();
+    echo '  <div id="view-sessionn-modal" class="">
+                <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
+                <div id="modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40 h-96" style="left:35%;">
+                        <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
+                            '.$_GET['view-session'].'
+                        </div>  ';
+    echo '              <div class="flex flex-col justify-between h-[20rem] px-4">';
+    echo  '                 <div>';
+    foreach ($MyAppoits as $row) {
+
+        if($row['title']==$session )
+        {   
+            echo '              <span class="font-semibold">Patient :</span>  ';
+            echo'               <span>'.$row["last_name"]." ".$row["first_name"].'</span>';
+            echo'               <br>'; 
+            echo '              <span class="font-semibold">Date :</span>  ';
+            echo'               <span>'.$row["date"].'</span>';
+            echo                '<br>';                   
+        }
+    }
+    echo  '                 </div>';
+    echo '                <button class="bg-red-600 rounded-md text-white p-1 pl-3 pr-3 w-[5rem] font-semibold" onclick="hide_modal()">Cancel</button>
+                        </div>
+                </div>
+            </div>' ;
+    unset($_GET['view-session']);
 }

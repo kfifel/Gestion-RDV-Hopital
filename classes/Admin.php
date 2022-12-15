@@ -83,7 +83,6 @@ class Admin extends Person{
             $stmt=$conn->prepare($sql);
             $stmt->execute([$MySession->title,$MySession->date_start,$MySession->max_patients,$MySession->doctor_id]);
             Database::disconnect();
-            // header('Location: ../admin-interfaces/admin-schedule.php');
         } catch (Exception $e) {
             die( 'Message: ' .$e->getMessage());
         }
@@ -96,7 +95,6 @@ class Admin extends Person{
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
         Database::disconnect();
-        header('Location: ../admin-interfaces/admin-schedule.php');
         } 
         catch (Exception $e) {
             echo 'Message: ' .$e->getMessage();
@@ -117,13 +115,20 @@ class Admin extends Person{
             $stmt = $conn->prepare($sql);
             $stmt->execute([$id]);
             Database::disconnect();
-            header('Location: ../admin-interfaces/admin-doctors.php');
             } 
             catch (Exception $e) {
                 echo 'Message: ' .$e->getMessage();
             }
     }
 
+    public function getAllAppointments(){
+        $conn = Database::connect();     // :: ->  for static methods or properties 
+        $requete = "SELECT appointment.id, appointment.order, appointment.date, patient.first_name,patient.last_name ,session.title  FROM `appointment` 
+                    INNER JOIN `patient` on patient.id= appointment.id_patient
+                    INNER JOIN `session` on appointment.id_session = session.id"    ; 
+        $res = $conn->query($requete); 
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
     // // *********test*********
     // $obj = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
