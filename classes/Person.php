@@ -1,15 +1,14 @@
 <?php
 require_once '../includes/autoload.php';
-
 abstract class Person
 {
-
     protected $id;
     protected string $first_name;
     protected string $last_name;
     protected string $email;
     protected string $password;
     protected string $role;
+
 
     public function __construct($id, string $first_name, string $last_name, string $email, string $password, string $role)
     {
@@ -62,19 +61,20 @@ abstract class Person
         $this->role = $role;
     }
 
-    public static function getStatistics(){
-        //please use var dump on "$stats" to discover the associative array keys
+    public static function getStatistics($choice){
+        //please use var dump on the methode to discover the returned value
+        // notive that you should pass parameter as the same key you want to return [countDoctor,countPatient,NewBooking,TodaySession]
         $stats = array();
 
         $req = Database::connect()->prepare('Select count(id) from doctor');
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
-        $stats['countDoctor'] = $result[0]['count(id)'];
+        $stats['CountDoctor'] = $result[0]['count(id)'];
 
         $req = Database::connect()->prepare('Select count(id) from patient');
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
-        $stats["countPatient"] = $result[0]['count(id)'];
+        $stats["CountPatient"] = $result[0]['count(id)'];
 
         $req = Database::connect()->prepare('Select count(id) from appointment where booking_date like CURRENT_DATE()');
         $req->execute();
@@ -84,12 +84,9 @@ abstract class Person
         $req = Database::connect()->prepare('Select count(id) from session where date_start like CURRENT_DATE()');
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
-        $stats['todaySession'] = $result[0]['count(id)'];
+        $stats['TodaySession'] = $result[0]['count(id)'];
 
         Database::disconnect();
-        return $stats;
+        return $stats[$choice];
     }
 }
-
-// Person::getStatistics();
-

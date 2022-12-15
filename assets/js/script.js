@@ -1,8 +1,13 @@
-function show_modal()
+function show_modal(e)
 {
-    document.querySelector('#modal-container').removeAttribute("style");
+    let element =e;
+    document.querySelector('#'+element).removeAttribute("style");
 }
-function hide_modal()
-{
-    document.querySelector('#modal-container').setAttribute("style","display:none;");
+function hide_modal(e)
+{   
+    let element =e;
+    if(element==null) document.querySelector('#view-sessionn-modal').setAttribute("style","display:none;");
+    else document.querySelector('#'+element).setAttribute("style","display:none;");
+    
 }
+

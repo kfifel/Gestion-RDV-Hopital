@@ -4,6 +4,7 @@
     <?php
         $GLOBALS['page_title'] = 'Doctor Dashboard';
         include('../includes/head.php');
+        require_once '../controller/Patient.controller.php';
     ?>
 </head>
 <body>
@@ -44,7 +45,7 @@
                 <div class="status flex justify-between flex-wrap gap-2 px-4">
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">1</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('CountDoctor') ?></span>
                             <span class="block">Doctors</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -53,7 +54,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">3</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('CountPatient') ?></span>
                             <span class="block">Patients</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -62,7 +63,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">0</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('NewBooking') ?></span>
                             <span class="block">New Booking</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -71,7 +72,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">0</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('TodaySession') ?></span>
                             <span class="block">Today's session</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -81,19 +82,33 @@
                 </div>
             </div>
             <div class="upcoming-sessions block w-full xl:w-1/2">
-                <h2 class="font-bold text-xl my-4 ">Upcoming Sessions until Next Week</h2>
+                <h2 class="font-bold text-xl my-4 ">Upcoming Bookings until Next Week</h2>
                 <div class="w-full h-64 border-x border-t rounded-md overflow-y-scroll mt-3">
                     <table class="w-full relative">
                         <tr class="sticky top-0 bg-white">
+                            <th class="border-b-4 p-2 border-sky-400">Appoint. Number</th>
                             <th class="border-b-4 p-2 border-sky-400">Session Title</th>
-                            <th class="border-b-4 p-2 border-sky-400">Schduled Date</th>
-                            <th class="border-b-4 p-2 border-sky-400">Time</th>
+                            <th class="border-b-4 p-2 border-sky-400">Doctor</th>
+                            <th class="border-b-4 p-2 border-sky-400">Scheduled Date & Time</th>
                         </tr>
-                        <tr>
-                            <td class="text-center p-2 ">Title</td>
-                            <td class="text-center p-2 ">12-12-2020</td>
-                            <td class="text-center p-2 ">18</td>
-                        </tr>
+                        <?php 
+                            $myApp = myAppointments();
+                            foreach ($myApp as $row){
+                                $App_number = $row['Appointment Number'];
+                                $title = $row['Session Title'];
+                                $doctor = $row['Doctor'];
+                                $App_date = $row['Appointment Date'];
+                                $App_time = $row['Appointment Time'];
+                                echo "
+                                    <tr class='border-2 border-sky-50'>
+                                        <td class='text-center py-2 font-bold'>$App_number</td>
+                                        <td class='text-center py-2 '>$title</td>
+                                        <td class='text-center py-2 '>$doctor</td>
+                                        <td class='text-center py-2 '>$App_date / $App_time</td>
+                                    </tr>
+                                ";
+                            }
+                        ?>
                     </table>
                 </div>
                 <a href="patient-scheduled-sessions.php">

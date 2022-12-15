@@ -4,6 +4,7 @@
     <?php
         $GLOBALS['page_title'] = 'Doctor Dashboard';
         include('../includes/head.php');
+        require_once '../controller/Doctor.controller.php';
     ?>
 </head>
 <body>
@@ -40,7 +41,7 @@
                 <div class="status flex justify-between flex-wrap gap-2 px-4">
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">1</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('CountDoctor') ?></span>
                             <span class="block">Doctors</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -49,7 +50,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">3</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('CountPatient') ?></span>
                             <span class="block">Patients</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -58,7 +59,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">0</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('NewBooking') ?></span>
                             <span class="block">New Booking</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -67,7 +68,7 @@
                     </div>
                     <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-5 ">
                         <div class="font-semibold">
-                            <span class="block text-sky-600">0</span>
+                            <span class="block text-sky-600"><?= Person::getStatistics('TodaySession') ?></span>
                             <span class="block">Today's session</span>
                         </div>
                         <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -85,11 +86,21 @@
                             <th class="border-b-4 p-2 border-sky-400">Schduled Date</th>
                             <th class="border-b-4 p-2 border-sky-400">Time</th>
                         </tr>
-                        <tr>
-                            <td class="text-center p-2 ">Title</td>
-                            <td class="text-center p-2 ">12-12-2020</td>
-                            <td class="text-center p-2 ">18</td>
-                        </tr>
+                        <?php 
+                            $sessionPerWeek = sessionsPerWeek();
+                            foreach ($sessionPerWeek as $row) {
+                                $title = $row['title'];
+                                $date_start = $row['date_start'];
+                                echo "
+                                    <tr class='border-2 border-sky-50'>
+                                        <td class='text-center py-2 '>$title</td>
+                                        <td class='text-center py-2 '>$date_start</td>
+                                        <td class='text-center py-2 '>--:--</td>
+                                    </tr>
+                                ";
+                            }
+                            
+                        ?>
                     </table>
                 </div>
                 <a href="doctor-my-sessions.php">
