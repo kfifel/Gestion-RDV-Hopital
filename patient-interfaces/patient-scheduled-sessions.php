@@ -3,13 +3,17 @@
 <?php 
     $GLOBALS['page_title']="Scheduled Sessions";
     include '../includes/head.php';
+    require '../controller/Patient.controller.php';
 ?>
 <body>
 
     <div id="page-content" class="">
 
         <div id="sidebar" class="">
-            <?php include '../includes/paitent-sidebar.php';  ?>
+            <?php 
+                $GLOBALS['current_page'] = 'scheduled_sessions';
+                include '../includes/paitent-sidebar.php';
+            ?>
         </div>
 
         <div class="p-5 pl-[18rem] w-full">
@@ -45,27 +49,38 @@
                     
                 </div>
             </div>
-
             <div class="mt-6 ">
                 <h5 class="font-semibold text-xl">All Sessions (<span>6</span>)</h5>
             </div>
+            <?php
 
-            <div class="border-[2px] rounded-md mt-[9rem] p-6 flex flex-col pl-[2.5rem] w-5/6">
-                <h5 class="text-blue-500 text-2xl font-semibold mt-4">Test Session</h5>
-                <p class="font-extralight font-semibold mt-[2.6rem]" style="font-family: arial;">
-                    <span class="font-bold">Test Doctor</span> <br>
-                    2050-01-01  <br>
-                    Starts: <span class="font-bold">@18:00</span> (24h)
-                </p>
-                <button class="flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-full m-auto h-[2.5rem] text-lg font-medium mt-[3rem]">
-                    <span class="m-[8px]">Book Now</span>
-                </button>
-            </div>
+                $scheduledSessions = scheduledSessions();
+                foreach($scheduledSessions as $row){
+                    $id_session = $row['id'];
+                    $title = $row['title'];
+                    $doctor = $row['first_name_doctor'] . " " . $row['last_name_doctor'];
+                    $date = $row['date_start'];
+                    echo "
+                    <div class='border-[2px] rounded-md mt-[9rem] p-6 flex flex-col pl-[2.5rem] w-5/6'>
+                        <h5 class='text-blue-500 text-2xl font-semibold mt-4'> $title </h5>
+                        <p class='font-extralight font-semibold mt-[2.6rem]' style='font-family: arial;'>
+                        <span class='font-bold'>$doctor</span> <br>
+                        $date  <br>
+                        Starts: <span class='font-bold'>@08:30</span> (24h)
+                        </p>
+                        <a href='/Gestion-RDB-Hopital/controller/Patient.controller.php?idsession=$id_session&date=$date'>
+                            <div class='flex justify-center items-center bg-blue-200 text-blue-600 rounded-md w-full m-auto h-[2.5rem] text-lg font-medium mt-[3rem]'>
+                                <span class='m-[8px]'>Book Now</span>
+                            </div>
+                        </a>
+                    </div>
+                    ";
+                }
+            ?>
         </div>
         
     </div>
 
     <script src="https://kit.fontawesome.com/6360d947ff.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

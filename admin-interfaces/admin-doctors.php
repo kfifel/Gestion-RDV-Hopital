@@ -9,7 +9,6 @@
     require '../controller/Admin.controller.php';
 
     $conn = Database::connect();
-        var_dump($conn);
 ?>
 <body>
 

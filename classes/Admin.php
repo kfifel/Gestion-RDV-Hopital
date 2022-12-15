@@ -30,12 +30,16 @@ class Admin extends Person{
     //     return $res;
     // }
  
-    public function cancelAppointment($id_appointment):bool{
+    static public function cancelAppointment($id_appointment):bool{
         //when we cancel an appointment we should update Session available places
         //the function returns false if something went wrong true otherwise
         $req = Database::connect()->query("SELECT id_session from appointment where id like $id_appointment");
         $result_id_session = $req->fetchAll(PDO::FETCH_ASSOC);
-        isset($result_id_session[0]['id_session']) ? $id_session = $result_id_session[0]['id_session'] : $id_session = null;
+        if(isset($result_id_session[0]['id_session'])){
+            $id_session = $result_id_session[0]['id_session'];
+        }else{
+            $id_session = null;
+        }
         try{           
             Database::connect()->query("UPDATE Session SET `max_patient` = max_patient+1 WHERE `id` like $id_session");
             Database::connect()->query("DELETE from appointment where id like $id_appointment");
@@ -120,6 +124,16 @@ class Admin extends Person{
                 echo 'Message: ' .$e->getMessage();
             }
     }
+    function getAllAppointment(){
+        $conn = Database::connect();
+        $requete = "select concat(p.first_name ,' ', p.last_name) as 'Patient Name', app.order as 'Appointment Number' , concat(d.first_name ,' ', d.last_name) as 'Doctor' , s.title as 'Session Title' , s.date_start as 'Session date' , app.date 'Appointment Date'
+        from patient as p, appointment as app, session as s , doctor d
+        where p.id = app.id_patient 
+        and app.id_session = s.id
+        and s.id_doctor = d.id"; 
+        $res = $conn->query($requete);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getAllAppointments(){
         $conn = Database::connect();     // :: ->  for static methods or properties 
@@ -146,9 +160,13 @@ class Admin extends Person{
 
 // test 
 // $Admin = new Admin(null,'fn','ln','email','pass','admin');
+// var_dump($Admin->getAllAppointments());
+// $_SESSION['user'] = $Admin;
 // $session = new Session(null,'title',null,date("Y-m-d"),10);
 // $Admin->createSession($session);
 // echo $Admin->cancelAppointment(37);
+// var_dump(Admin::readSession());
+
 
 
 

@@ -4,6 +4,7 @@
     <?php
         $GLOBALS['page_title'] = 'Admin Dashboard';
         include('../includes/head.php');
+        require '../controller/Admin.controller.php';
     ?>
 </head>
 <body>
@@ -35,7 +36,7 @@
         <div class="status flex justify-between flex-wrap gap-2">
             <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-3">
                 <div class="font-semibold">
-                    <span class="block text-sky-600">1</span>
+                    <span class="block text-sky-600"><?= Person::getStatistics('CountDoctor') ?></span>
                     <span class="block">Doctors</span>
                 </div>
                 <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -44,7 +45,7 @@
             </div>
             <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-3">
                 <div class="font-semibold">
-                    <span class="block text-sky-600">3</span>
+                    <span class="block text-sky-600"><?= Person::getStatistics('CountPatient') ?></span>
                     <span class="block">Patients</span>
                 </div>
                 <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -53,7 +54,7 @@
             </div>
             <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-3">
                 <div class="font-semibold">
-                    <span class="block text-sky-600">0</span>
+                    <span class="block text-sky-600"><?= Person::getStatistics('NewBooking') ?></span>
                     <span class="block">New Booking</span>
                 </div>
                 <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -62,7 +63,7 @@
             </div>
             <div class=" border-2 border-slate-200 rounded-lg justify-between flex w-56 p-3">
                 <div class="font-semibold">
-                    <span class="block text-sky-600">0</span>
+                    <span class="block text-sky-600"><?= Person::getStatistics('TodaySession') ?></span>
                     <span class="block">Today's session</span>
                 </div>
                 <div class="h-14 w-14 flex justify-center items-center border-2 rounded bg-slate-100">
@@ -72,7 +73,7 @@
         </div>
         <div class="flex flex-col xl:flex-row gap-4">
             <div class="upcoming-appointments block m-0 w-full xl:w-1/2">
-                <h2 class="font-bold text-sky-700 text-2xl my-4">Upcoming Appointments until Next <span>*day*</span></h2>
+                <h2 class="font-bold text-sky-700 text-2xl my-4">Upcoming Appointments until Next <?= date_format(dateAfterWeek(),"l") ?></h2>
                 <p class="my-4 font-medium text-slate-700 ">Here's Quick access to Upcoming Appointments until 7 days<br>more details available in @Appointment section.</p>
                 <div class="w-full h-64 border-x border-t rounded-md overflow-y-scroll mt-3">
                     <table class="w-full relative">
@@ -82,12 +83,24 @@
                             <th class="border-b-4 p-2 border-sky-400">Doctor</th>
                             <th class="border-b-4 p-2 border-sky-400">Session</th>
                         </tr>
-                        <tr>
-                            <td class="text-center p-2 ">4</td>
-                            <td class="text-center p-2 ">jhon doe</td>
-                            <td class="text-center p-2 ">Dr Brahim</td>
-                            <td class="text-center p-2 ">45</td>
-                        </tr>
+                        <?php 
+                            $appointmentPerWeek = appointmentPerWeek();
+                            foreach ($appointmentPerWeek as $row){
+                                $appointment_number = $row['Appointment Number'];
+                                $patient_name = $row['Patient Name'];
+                                $doctor = $row['Doctor'];
+                                $session = $row['Session Title'];
+                                echo "
+                                    <tr class='border-2 border-sky-50'>
+                                        <td class='text-center py-3 font-bold'>$appointment_number</td>
+                                        <td class='text-center py-3'>$patient_name</td>
+                                        <td class='text-center py-3'>$doctor</td>
+                                        <td class='text-center py-3'>$session</td>
+                                    </tr>
+                                ";
+                            }
+                            
+                        ?>
                     </table>
                 </div>
                 <a href="admin-appointment.php">
@@ -95,7 +108,7 @@
                 </a>
             </div>
             <div class="upcoming-sessions block w-full xl:w-1/2">
-                <h2 class="font-bold text-sky-700 text-2xl my-4 xl:text-right">Upcoming Sessions until Next <span>*day*</span></h2>
+                <h2 class="font-bold text-sky-700 text-2xl my-4 xl:text-right">Upcoming Sessions until Next <?= date_format(dateAfterWeek(),"l") ?></h2>
                 <p class="my-4 font-medium text-slate-700 xl:text-right">Here's Quick access to Upcoming Sessions taht until 7 days<br>Add,Remove and Many features available in @Schedule section.</p>
                 <div class="w-full h-64 border-x border-t rounded-md overflow-y-scroll mt-3">
                     <table class="w-full relative">
@@ -104,11 +117,23 @@
                             <th class="border-b-4 p-2 border-sky-400">Doctor</th>
                             <th class="border-b-4 p-2 border-sky-400">Schduled Date & Time</th>
                         </tr>
-                        <tr>
-                            <td class="text-center p-2 ">Title</td>
-                            <td class="text-center p-2 ">jhon doe</td>
-                            <td class="text-center p-2 ">Dr Brahim</td>
-                        </tr>
+                        <?php 
+                            $sessionPerWeek = sessionsPerWeek();
+                            foreach ($sessionPerWeek as $row) {
+                                $title = $row['title'];
+                                $date_start = $row['date_start'];
+                                $first_name_doctor = $row['first_name_doctor'];
+                                $last_name_doctor = $row['last_name_doctor'];
+                                echo "
+                                    <tr class='border-2 border-sky-50'>
+                                        <td class='text-center py-2 '>$title</td>
+                                        <td class='text-center py-2 '>$first_name_doctor $last_name_doctor</td>
+                                        <td class='text-center py-2 '>$date_start</td>
+                                    </tr>
+                                ";
+                            }
+                            
+                        ?>
                     </table>
                 </div>
                 <a href="admin-schedule.php">

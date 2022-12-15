@@ -1,7 +1,6 @@
 <?php 
-require('../includes/autoload.php');
-
-// include ('../admin-interfaces/admin-doctors.php');
+require_once('../includes/autoload.php');
+// include('../classes/Person.php');
 // ROUTING
 if( isset($_POST['add_doctor']) )  addDoctor();
 
@@ -18,16 +17,16 @@ function addDoctor(){
     $speciality = $_POST['speciality'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $Admin = $_SESSION['admin']; 
+    $Admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $doc = new Doctor (null,$first_name, $last_name, $email, $password, 'doctor',$speciality);
     $addDoc=$Admin->addDoctor($doc);
     // if($addDoc){
         // echo "<h1 style='background-color:green;text:center;'>doctor has added <h1>";
     // }
-    }
-    function getAllDoctor(){
-        $doctor = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
-        return $doctor->getAllDoctors();
+}
+function getAllDoctor(){
+    $doctor = new Admin (1,'admin', 'ADMIN', 'admin@gmail.com', '123', 'admin'); 
+    return $doctor->getAllDoctors();
 
         // foreach($doctor as $row){
         //     echo `<tr class="bg-white border-b text-base font-medium text-black ">
@@ -36,7 +35,7 @@ function addDoctor(){
         //     </th>
         //     <td class="py-4 px-6 text-center">
         //     `.$row['email'].`
-
+    
         //     </td>
         //     <td class="py-4 px-6 text-center">
         //     `.$row['speciality'].`
@@ -57,17 +56,16 @@ function createSession(){
     $date=$_POST['session-date'];
     $max_patients=$_POST['session-patients'];
     $MySession= new Session($title,$doctor_id,$date,$max_patients);
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $admin->createSession($MySession);
     header('Location: ../admin-interfaces/admin-schedule.php');
 }
 
 function deteSession(){
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $admin->deleteSession($_GET['delete-session']);
     header('Location: ../admin-interfaces/admin-schedule.php');
 }
-
 function readSession(){
     $date = isset($_POST['session-date-filter']) ? $_POST['session-date-filter'] : null;
     $doctor = isset($_POST['session-doctor-filter']) ? $_POST['session-doctor-filter'] : null;
@@ -108,7 +106,7 @@ function readSession(){
     unset($_POST['session-doctor-filter']);
 }
 function setDoctorAsOptions(){
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $MyDoctors=$admin->getAllDoctors();
     foreach($MyDoctors as $doctor)
     {   
@@ -117,15 +115,14 @@ function setDoctorAsOptions(){
     }
 }
 function deleteDoctor(){
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $admin->deleteDoctor($_GET['deletebutton']);
     header('Location: ../admin-interfaces/admin-schedule.php');
 }
-
 function viewSession(){
     $modal_id="view-sessionn-modal";
     $session=strtolower($_GET['view-session']);
-    $admin = $_SESSION['admin']; 
+    $admin = new Admin(null,'fn','ln','email','pass','admin'); 
     $MyAppoits=$admin->getAllAppointments();
     echo '  <div id="view-sessionn-modal" class="">
                 <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
@@ -153,4 +150,36 @@ function viewSession(){
                 </div>
             </div>' ;
     unset($_GET['view-session']);
+}
+function dateAfterWeek(){
+    $date = date_create();
+    date_add($date,date_interval_create_from_date_string("7 days"));
+    return $date;
+}
+function sessionsPerWeek(){
+    $sessions = Admin::readSession();
+    $today = date("Y-m-d");
+    $nextWeekDay = date_format(dateAfterWeek(),"Y-m-d");
+    $weekSession = array();
+    foreach ($sessions as $row) {
+        if($today <= $row['date_start'] && $row['date_start'] <= $nextWeekDay){
+            array_push($weekSession,$row);
+        }
+    }
+    return $weekSession;
+}
+function appointmentPerWeek(){
+    $Admin = new Admin(null,'fn','ln','email','pass','admin');
+    $_SESSION['admin'] = $Admin;
+
+    $appointments = $_SESSION['admin']->getAllAppointment();
+    $today = date("Y-m-d");
+    $nextWeekDay = date_format(dateAfterWeek(),"Y-m-d");
+    $weekAppointment = array();
+    foreach ($appointments as $row){
+        if($today <= $row['Appointment Date'] && $row['Appointment Date'] <= $nextWeekDay){
+            array_push($weekAppointment,$row);
+        }
+    }
+    return $weekAppointment;
 }
