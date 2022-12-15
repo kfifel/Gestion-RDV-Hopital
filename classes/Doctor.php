@@ -9,6 +9,15 @@ class Doctor extends Person
         $this->speciality = $speciality;
         parent::__construct($id, $first_name, $last_name, $email, $password, $role);
     }
+    public function setSpeciality($speciality){
+        $this->speciality = $speciality;;
+    }
+
+    public function getSpeciality(){
+        return $this->speciality;
+    }
+
+   
 
     public function getAppointments(int $id):array{
         $conn = Database::connect();

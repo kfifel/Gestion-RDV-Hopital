@@ -19,3 +19,10 @@
 .patient-home .banner{
     background-image : url('/Gestion-RDB-Hopital/assets/img/b3.jpg');
 }
+#indexBody{
+    background-image: url("../img/bg01.jpg");
+    background-size: cover;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

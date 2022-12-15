@@ -92,11 +92,6 @@ class Appointment
         return false;
     }
 
-    public function getAllAppointment():array{
-        $conn = Database::connect();
-        return $conn->query("SELECT * FROM Appointment")->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public static function findAppointmentById(int $id):array{
         $conn = Database::connect();
         return $conn->query("SELECT * FROM Appointment WHERE id=$id")->fetch(PDO::FETCH_ASSOC);
