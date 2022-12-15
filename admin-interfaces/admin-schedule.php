@@ -42,7 +42,7 @@
                 <!-- ADD SESSION GOES HERE -->
                 <div id="schedule-session" class="flex justify-start items-center mt-9">
                     <h3 class="text-xl font-semibold">Schedule a Session</h3>
-                    <button type="button" onclick="show_modal()" class="flex justify-between bg-blue-600 rounded-md text-white p-1 pl-3 pr-3 w-[10rem] ml-6">
+                    <button type="button" onclick="show_modal('modal-container')"   >
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                         <span>Add a Session</span>
                     </button>
@@ -138,7 +138,7 @@
 
                 </div>
                 <div id="modal-footer" class="flex justify-end bg-gray-200 border-t-2 p-2 rounded-b-lg w-100">
-                    <button type="button" onclick="hide_modal()" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
+                    <button type="button" onclick="hide_modal('modal-container')" class="bg-red-600 rounded-md w-24 h-[2.5rem] text-white">Cancel</button>
                     <button type="submit" class="bg-blue-500 rounded-md w-24 h-[2.5rem] text-white ml-4" name="create-session">Submit</button>
                 </div>
             </form>

@@ -78,17 +78,14 @@ function viewSession(){
     $session=strtolower($_GET['view-session']);
     $admin=new Admin(1,"Mohamed","Amine","amineelaabdi@gmail.com","123","admin");
     $MyAppoits=$admin->getAllAppointments();
-    var_dump($MyAppoits);
-    // echo "<script>document.addEventListener('DOMContentLoaded', function () {
-    //     document.querySelector('#view-sessionn-modal').removeAttribute('style');
-    //   }, false);</script>";
     echo '  <div id="view-sessionn-modal" class="">
                 <div id="modal-background" class="w-screen h-screen fixed top-0 left-0 z-30"style="background-color:RGBA(0,0,0,0.57);"></div>
-                <div id="modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40 " style="left:35%;">
-                    <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
-                        '.$_GET['view-session'].'
-                    </div>';
-
+                <div id="modal-content" class=" w-[30rem] fixed top-0  mt-[10rem] bg-white rounded-lg z-40 h-96" style="left:35%;">
+                        <div id="modal-header"class="text-center font-semibold text-xl p-2 pt-4 ">
+                            '.$_GET['view-session'].'
+                        </div>  ';
+    echo '              <div class="flex flex-col justify-between h-24" style="border :solid red;">';
+    echo  '                 <div>';
     foreach ($MyAppoits as $row) {
 
         if($row['title']==$session )
@@ -101,6 +98,23 @@ function viewSession(){
             echo'<br>';                   
         }
     }
-    echo '      </div>
+    echo  '                 </div>';
+    echo '                  <button class="flex justify-between bg-red-600 rounded-md text-white p-1 pl-3 pr-3 w-[5rem] ml-6 font-semibold">Cancel</button>
+                        </div>
+                </div>
             </div>';
+    unset($_GET['view-session']);
 }
+
+// foreach ($MyAppoits as $row) {
+
+//     if($row['title']==$session )
+//     {   
+//         echo '<span class="font-semibold">Patient :</span>  ';
+//         echo'<span>'.$row["last_name"]." ".$row["first_name"].'</span>';
+//         echo'<br>'; 
+//         echo '<span class="font-semibold">Date :</span>  ';
+//         echo'<span>'.$row["date"].'</span>';
+//         echo'<br>';                   
+//     }
+// }

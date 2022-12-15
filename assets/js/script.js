@@ -1,9 +1,11 @@
-function show_modal()
+function show_modal(e)
 {
-    document.querySelector('#modal-container').removeAttribute("style");
+    let element =e;
+    document.querySelector('#'+element).removeAttribute("style");
 }
-function hide_modal()
+function hide_modal(e)
 {
-    document.querySelector('#modal-container').setAttribute("style","display:none;");
+    let element =e;
+    document.querySelector('#'+element).setAttribute("style","display:none;");
 }
 
