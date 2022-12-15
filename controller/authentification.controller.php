@@ -15,6 +15,9 @@ if (isset($_POST["save"])) {
         $_SESSION["error"] = "somethings was wrong";
         header("Location: ../SingUp.php");
     }
+}
 
-
+if(isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: ../index.php");
 }

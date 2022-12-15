@@ -6,7 +6,7 @@
             <small>doctor@youcode.ma</small>
         </div>
     </div>
-    <a href="">
+    <a href="../controller/authentification.controller.php?logout=true  ">
         <div class="mx-4 bg-sky-200 rounded text-center">log out</div>
     </a>
     <hr class="mx-2 mt-6 mb-2">
