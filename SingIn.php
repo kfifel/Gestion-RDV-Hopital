@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<form method="post" action="./controller/Authentification.php" name="loginform">
+<form method="post" action="./controller/authentification.controller.php" name="loginform">
     <div class="min-h-screen  flex flex-col justify-center ">
         <div class="relative py-3 max-w-xl mx-auto">
             <div
