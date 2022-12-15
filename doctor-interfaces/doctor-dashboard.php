@@ -4,7 +4,7 @@
     <?php
         $GLOBALS['page_title'] = 'Doctor Dashboard';
         include('../includes/head.php');
-        require_once '../controller/Admin.controller.php';
+        require_once '../controller/Doctor.controller.php';
     ?>
 </head>
 <body>
@@ -86,11 +86,21 @@
                             <th class="border-b-4 p-2 border-sky-400">Schduled Date</th>
                             <th class="border-b-4 p-2 border-sky-400">Time</th>
                         </tr>
-                        <tr>
-                            <td class="text-center p-2 ">Title</td>
-                            <td class="text-center p-2 ">12-12-2020</td>
-                            <td class="text-center p-2 ">18</td>
-                        </tr>
+                        <?php 
+                            $sessionPerWeek = sessionsPerWeek();
+                            foreach ($sessionPerWeek as $row) {
+                                $title = $row['title'];
+                                $date_start = $row['date_start'];
+                                echo "
+                                    <tr class='border-2 border-sky-50'>
+                                        <td class='text-center py-2 '>$title</td>
+                                        <td class='text-center py-2 '>$date_start</td>
+                                        <td class='text-center py-2 '>--:--</td>
+                                    </tr>
+                                ";
+                            }
+                            
+                        ?>
                     </table>
                 </div>
                 <a href="doctor-my-sessions.php">

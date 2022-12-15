@@ -46,43 +46,80 @@ class Patient extends Person
     }
     public function takeAppointment($id_session , $start_session_date){
         // this methode takes session id and its starting date it start generating your upcoming appointment date 
-        // notice that max appointment per jr is 4 appointments
+        // notice that max appointment per day is 4 appointments
         // basically it generates a potential appointment day then it counts how many already exists in the same day
-        // if there is 4 it continues to next day etc... 
-        $start_session_date = date_create($start_session_date);
-        $booking_date = date_create();
-        $appointment_date = '';
+        // if there is 4 it continues to next day etc...
 
 
-        if($booking_date < $start_session_date){
-            $appointment_date = $start_session_date;
-        }else{
-            $appointment_date = $booking_date;
-            date_add($appointment_date,date_interval_create_from_date_string("1 days"));
-        }
+        
 
-        while (true) {
-            $date = date_format($appointment_date,"Y-m-d");
-            $count_query = "SELECT count(*) from appointment where id_session = $id_session and date = '$date'";
-            $result_count_query = Database::connect()->query($count_query)->fetchAll(PDO::FETCH_ASSOC);
+        $count_query = "SELECT count(*) from appointment where id_session = $id_session and `id_patient` = $this->id";
+        $count_result = Database::connect()->query($count_query)->fetchAll(PDO::FETCH_ASSOC);
+        $count_book_session = $count_result[0]['count(*)'];
+        
+        //checking if he or she already booked in this session
+        if($count_book_session == 0){
 
-            $count_number =  $result_count_query[0]['count(*)'];
-            echo $count_number;
-            if($count_number < 4){
-                $appointment_date = date_format($appointment_date,"Y-m-d");
+            $start_session_date = date_create($start_session_date);
+            $booking_date = date_create();
+            $appointment_date = '';
 
-                Database::connect()->query("INSERT INTO `appointment`(`order`, `date`, `booking_date`, `id_patient`, `id_session`) VALUES ($count_number+1,'$appointment_date',CURRENT_DATE(),$this->id,$id_session)");
-                Database::connect()->query("UPDATE `session` SET `max_patient`= max_patient - 1 WHERE `id`= $id_session");
-                break;
+            if($booking_date < $start_session_date){
+                $appointment_date = $start_session_date;
+            }else{
+                $appointment_date = $booking_date;
+                date_add($appointment_date,date_interval_create_from_date_string("1 days"));
             }
-            date_add($appointment_date,date_interval_create_from_date_string("1 days"));
+            while (true) {
+                $date = date_format($appointment_date,"Y-m-d");
+                $count_query = "SELECT count(*) from appointment where id_session = $id_session and date = '$date'";
+                $result_count_query = Database::connect()->query($count_query)->fetchAll(PDO::FETCH_ASSOC);
+
+                $count_number =  $result_count_query[0]['count(*)'];
+                if($count_number < 4){
+
+                    $count_query = "SELECT count(*) from appointment where id_patient = $this->id and `date` = '$date'";
+                    $count_result = Database::connect()->query($count_query)->fetchAll(PDO::FETCH_ASSOC);
+                    $count_book_day = $count_result[0]['count(*)'];
+                    
+                    //checking if he or she already booked in this date
+                    if($count_book_day == 0){
+                        $time = "";
+                        $count_number = $count_number+1;
+                        switch($count_number){
+                            case 1:
+                                $time = "09:00 24H";
+                                break;
+                            case 2:
+                                $time = "10:30 24H";
+                                break;
+                            case 3:
+                                $time = "13:30 24H";
+                                break;
+                            case 4:
+                                $time = "15:00 24H";
+                                break;
+                        }
+                        $appointment_date = date_format($appointment_date,"Y-m-d");
+
+                        Database::connect()->query("INSERT INTO `appointment`(`order`, `date`, `booking_date`, `id_patient`, `id_session` ,`time`) VALUES ($count_number,'$appointment_date',CURRENT_DATE(),$this->id,$id_session,'$time')");
+                        Database::connect()->query("UPDATE `session` SET `max_patient`= max_patient - 1 WHERE `id`= $id_session");
+                        break;
+                    }
+                }
+                date_add($appointment_date,date_interval_create_from_date_string("1 days"));
+            }
         }
-
-
     }
-    public function getOldAppointment():array{
+    public function getMyAppointment():array{
         $conn = Database::connect();
-        $old_appointments_result = $conn->query("SELECT * FROM Appointment where id_patient like $this->id and booking_date < CURRENT_DATE()")->fetchAll(PDO::FETCH_ASSOC);
+        $old_appointments_result = $conn->query("select concat(p.first_name ,' ', p.last_name) as 'Patient Name', app.order as 'Appointment Number' , concat(d.first_name ,' ', d.last_name) as 'Doctor' , s.title as 'Session Title' , s.date_start as 'Session date' , app.date 'Appointment Date' , app.time as 'Appointment Time' , app.booking_date as 'booking date' , app.id as 'id appointment'
+        from patient as p, appointment as app, session as s , doctor d
+        where p.id = app.id_patient 
+        and app.id_session = s.id
+        and s.id_doctor = d.id
+        and p.id like $this->id
+        and date >= CURRENT_DATE();")->fetchAll(PDO::FETCH_ASSOC);
         return $old_appointments_result;
     }
 
@@ -100,6 +137,7 @@ class Patient extends Person
 }
 
 // $p = new Patient(4,'karim','hamid','kara@kra','xxxxxxxxe','2020-12-11');
+// $p->takeAppointment(5,'2022-12-15');
 
 
 

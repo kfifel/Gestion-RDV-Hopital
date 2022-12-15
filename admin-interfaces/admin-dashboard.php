@@ -83,7 +83,24 @@
                             <th class="border-b-4 p-2 border-sky-400">Doctor</th>
                             <th class="border-b-4 p-2 border-sky-400">Session</th>
                         </tr>
-                        <?php appointmentPerWeek(); ?>
+                        <?php 
+                            $appointmentPerWeek = appointmentPerWeek();
+                            foreach ($appointmentPerWeek as $row){
+                                $appointment_number = $row['Appointment Number'];
+                                $patient_name = $row['Patient Name'];
+                                $doctor = $row['Doctor'];
+                                $session = $row['Session Title'];
+                                echo "
+                                    <tr class='border-2 border-sky-50'>
+                                        <td class='text-center py-3 font-bold'>$appointment_number</td>
+                                        <td class='text-center py-3'>$patient_name</td>
+                                        <td class='text-center py-3'>$doctor</td>
+                                        <td class='text-center py-3'>$session</td>
+                                    </tr>
+                                ";
+                            }
+                            
+                        ?>
                     </table>
                 </div>
                 <a href="admin-appointment.php">
@@ -100,7 +117,23 @@
                             <th class="border-b-4 p-2 border-sky-400">Doctor</th>
                             <th class="border-b-4 p-2 border-sky-400">Schduled Date & Time</th>
                         </tr>
-                        <?php echo sessionsPerWeek() ?>
+                        <?php 
+                            $sessionPerWeek = sessionsPerWeek();
+                            foreach ($sessionPerWeek as $row) {
+                                $title = $row['title'];
+                                $date_start = $row['date_start'];
+                                $first_name_doctor = $row['first_name_doctor'];
+                                $last_name_doctor = $row['last_name_doctor'];
+                                echo "
+                                    <tr class='border-2 border-sky-50'>
+                                        <td class='text-center py-2 '>$title</td>
+                                        <td class='text-center py-2 '>$first_name_doctor $last_name_doctor</td>
+                                        <td class='text-center py-2 '>$date_start</td>
+                                    </tr>
+                                ";
+                            }
+                            
+                        ?>
                     </table>
                 </div>
                 <a href="admin-schedule.php">

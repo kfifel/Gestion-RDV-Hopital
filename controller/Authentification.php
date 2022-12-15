@@ -6,7 +6,7 @@
 
     if (isset($_POST["save"])) {
         $me = new Patient(1, $_POST["first_name"], $_POST["last_name"], $_POST["email"], $_POST["password"], "patient", "2022-12-12");
-        $me->addPatient();
+        // $me->addPatient();
     }
 
 class Authentification
@@ -35,7 +35,7 @@ class Authentification
             if ($result['role'] == "admin") {
                 $_SESSION['admin']= new Admin($result['id'], $result['first_name'], $result['last_name'], $result['email'], $result['password'], $result['role']);
 
-                header('location: ../SingUp.php');// localiser vers dashboard admin
+                header('location: ../admin-interfaces/admin-dashboard.php');// localiser vers dashboard admin
             } else if ($result['role'] == "patient") {
                 $_SESSION['user']= new Patient($result['id'], $result['first_name'], $result['last_name'], $result['email'], $result['password'], $result['role'], $result['date_of_birth']);
 
