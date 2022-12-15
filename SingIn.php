@@ -47,7 +47,12 @@
                             <div>
                                 <h6 class=" flex justify-center text-gray-500 font-semibold text-xs">Don't have an
                                     account ? <a href="SingUp.php" class="text-black font-bold	">Sing Up</a></h6>
-                                <?=@$_SESSION['message']?>
+                                <p class="font-bold text-red-400">
+                                    <?php
+                                        echo @$_SESSION['message'];
+                                        unset($_SESSION['message']);
+                                    ?>
+                                </p>
                             </div>
                         </div>
                     </div>
