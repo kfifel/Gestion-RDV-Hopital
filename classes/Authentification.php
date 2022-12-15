@@ -45,4 +45,8 @@ class Authentification
             header('Location: ../SingIn.php');
         }
     }
+
+    public static function logout(){
+
+    }
 }
